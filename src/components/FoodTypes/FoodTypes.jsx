@@ -8,7 +8,7 @@ const FoodTypes = () => {
   const [value, setValue] = useState(0);
 
   const baseURL = "https://media-assets.swiggy.com/swiggy/image/upload";
-  const [food, setFood] = useState(
+  const [food] = useState(
     SwiggyData?.data?.cards[0]?.card?.card?.imageGridCards?.info
   );
 
@@ -25,8 +25,8 @@ const FoodTypes = () => {
 
   return (
     <div className="w-full">
-      <div className="mx-auto flex max-w-[75%] items-center justify-between py-3">
-        <p className="text-2xl font-bold">What's in your mind?</p>
+      <div className="flex items-center justify-between py-3">
+        <p className="text-2xl font-bold">What&apos;s in your mind?</p>
         <div className="flex gap-3">
           <span
             onClick={handlePrev}
@@ -44,7 +44,7 @@ const FoodTypes = () => {
           </span>
         </div>
       </div>
-      <div className="mx-auto w-[75%] overflow-hidden">
+      <div className="overflow-hidden">
         <div
           className="flex duration-1000"
           style={{ transform: `translateX(-${value}%)` }}
