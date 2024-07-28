@@ -1,22 +1,19 @@
 import { useState } from "react";
 import SwiggyData from "../../constants/SwiggyData.json";
 
-// image base address
-// https://media-assets.swiggy.com/swiggy/image/upload
-
 const FoodTypes = () => {
   const [value, setValue] = useState(0);
-
+  // base URL for images
   const baseURL = "https://media-assets.swiggy.com/swiggy/image/upload";
   const [food] = useState(
     SwiggyData?.data?.cards[0]?.card?.card?.imageGridCards?.info
   );
-
+  // console.log(food);
   const handleNext = () => {
     if (value >= 155) return;
     setValue((prev) => prev + 31);
   };
-  console.log(value);
+  // console.log(value);
 
   const handlePrev = () => {
     if (value === 0) return;
