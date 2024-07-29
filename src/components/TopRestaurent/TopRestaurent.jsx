@@ -1,11 +1,8 @@
-// import { useEffect } from "react";
-// import { getFoodTypesData } from "../../apis";
 import { useState } from "react";
 import SwiggyData from "../../constants/SwiggyData.json";
 const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 const TopRestaurent = () => {
   const [value, setValue] = useState(0);
-  let cursins = "";
   const [food] = useState(
     SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
       ?.restaurants
@@ -122,11 +119,8 @@ const TopRestaurent = () => {
                     </p>
                   </div>
 
-                  <div className="flex gap-2 text-gray-600">
-                    {item.info.cuisines.map((cuisine, index) => {
-                      cursins = cuisine;
-                      return <p key={cuisine}>{index <= 2 && cursins}</p>;
-                    })}
+                  <div className="line-clamp-1 text-gray-600">
+                    {item.info.cuisines.join(", ")}
                   </div>
                   <div className="text-gray-600">{item.info.areaName}</div>
                 </div>
