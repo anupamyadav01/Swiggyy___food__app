@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="sticky top-0 z-50 h-20 w-full bg-white px-16 py-4 shadow-md">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between">
         <div className="flex items-center">
-          <div className="pr-10">
+          <Link to={"/"} className="cursor-pointer pr-10">
             <svg
               className="_8pSp-"
               viewBox="0 0 559 825"
@@ -31,7 +33,7 @@ const Navbar = () => {
                 </linearGradient>
               </defs>
             </svg>
-          </div>
+          </Link>
           <div className="flex items-center gap-4">
             <p className="cursor-pointer border-b-2 border-b-black font-bold hover:border-b-2 hover:border-b-orange-500 hover:text-orange-500">
               others
@@ -40,19 +42,22 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex items-center gap-12 text-[#374151]">
-          <div className="flex cursor-pointer items-center gap-2">
+          <Link
+            to={"/search"}
+            className="flex cursor-pointer items-center gap-2"
+          >
             <i className="fi fi-rr-search mt-1 text-xl"></i>
             <p className="text-lg font-medium">Search</p>
-          </div>{" "}
+          </Link>{" "}
           <div className="flex cursor-pointer items-center gap-2">
             <i className="fi fi-rr-user mt-1 text-xl"></i>
             <p className="text-lg font-medium">Sign in</p>
           </div>{" "}
-          <div className="flex cursor-pointer items-center gap-2">
+          <Link to={"/cart"} className="flex cursor-pointer items-center gap-2">
             <i className="fi fi-rr-shopping-cart-add mt-1 text-xl"></i>
             <p className="text-lg font-medium">Cart</p>
             <p className="text-lg font-medium">0</p>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

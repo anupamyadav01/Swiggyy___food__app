@@ -6,7 +6,7 @@ const Restaurents = () => {
     SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
       ?.restaurants
   );
-  console.log(food);
+  // console.log(food);
   return (
     <div>
       <div>

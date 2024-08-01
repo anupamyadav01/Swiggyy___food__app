@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SwiggyData from "../../constants/SwiggyData.json";
+import { Link } from "react-router-dom";
 const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 const TopRestaurent = () => {
   const [value, setValue] = useState(0);
@@ -51,8 +52,9 @@ const TopRestaurent = () => {
         >
           {food.map((item) => {
             return (
-              <div
+              <Link
                 key={item.info.id}
+                to={`/restaurant/${item.info.id}`}
                 className="cursor-pointer duration-100 hover:scale-95"
               >
                 <div className="relative h-44 overflow-hidden rounded-2xl">
@@ -62,9 +64,10 @@ const TopRestaurent = () => {
                     alt=""
                   />
                   <div className="from-1% absolute bottom-0 left-0 flex h-full w-full items-end justify-start bg-gradient-to-t from-black to-transparent to-40% p-2 text-xl font-extrabold uppercase text-white">
-                    {item.info?.aggregatedDiscountInfoV3?.header +
-                      " " +
-                      item.info?.aggregatedDiscountInfoV3?.subHeader}
+                    {item.info?.aggregatedDiscountInfoV3 &&
+                      item.info?.aggregatedDiscountInfoV3?.header +
+                        " " +
+                        item.info?.aggregatedDiscountInfoV3?.subHeader}
                   </div>
                 </div>
                 <div className="pl-3">
@@ -89,7 +92,7 @@ const TopRestaurent = () => {
                   </div>
                   <div className="text-gray-600">{item.info.areaName}</div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

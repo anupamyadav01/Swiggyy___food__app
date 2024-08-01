@@ -14,9 +14,10 @@ const RestaurentCard = ({ item }) => {
             alt=""
           />
           <div className="from-1% absolute bottom-0 left-0 flex h-full w-full items-end justify-start bg-gradient-to-t from-black to-transparent to-40% p-2 text-lg font-extrabold uppercase text-white">
-            {item.info?.aggregatedDiscountInfoV3?.header +
-              " " +
-              item.info?.aggregatedDiscountInfoV3?.subHeader}
+            {item.info?.aggregatedDiscountInfoV3 &&
+              item.info?.aggregatedDiscountInfoV3?.header +
+                " " +
+                item.info?.aggregatedDiscountInfoV3?.subHeader}
           </div>
         </div>
         <div className="pl-3">
@@ -45,9 +46,6 @@ const RestaurentCard = ({ item }) => {
 
 RestaurentCard.propTypes = {
   item: PropTypes.object
-};
-RestaurentCard.defaultProps = {
-  item: {}
 };
 
 export default RestaurentCard;
