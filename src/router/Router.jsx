@@ -21,7 +21,7 @@ const Router = () => {
           <Route path="/restaurant/:id" element={<RestaurantDetail />} />
         </Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };
