@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import OffersCard from "../../components/OffersCard/OffersCard";
 // import RestaurantData from "../../constants/RestaurantDetails.json";
 const RestaurantDetail = () => {
   const { id } = useParams();
@@ -8,6 +9,7 @@ const RestaurantDetail = () => {
   const [menuData, setMenuData] = useState([]);
   const [offersData, setOffersData] = useState([]);
   const [restaurantInfo, setRestaurantInfo] = useState([]);
+  const [value, setValue] = useState(0);
   // console.log(menuData);
 
   const fetchRestaurantDetails = async () => {
@@ -31,6 +33,9 @@ const RestaurantDetail = () => {
   useEffect(() => {
     fetchRestaurantDetails();
   }, []);
+
+  const handleNext = () => {};
+  const handlePrev = () => {};
 
   return (
     <div className="w-full">
@@ -116,6 +121,68 @@ const RestaurantDetail = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* deals for you section */}
+        <div className="mx-6">
+          <div className="w-full overflow-hidden">
+            <div className="mt-8 flex justify-between">
+              <h1 className="text-xl font-bold">Deals for you</h1>
+              <div className="flex gap-3">
+                <div
+                  onClick={handlePrev}
+                  className={
+                    `flex h-9 w-9 cursor-pointer items-center justify-center rounded-full ` +
+                    (value <= 0 ? "bg-gray-100" : "bg-gray-200")
+                  }
+                >
+                  <i
+                    className={
+                      `fi fi-rr-arrow-small-left mt-1 text-2xl ` +
+                      (value <= 0 ? "text-gray-300" : "text-gray-800")
+                    }
+                  ></i>
+                </div>
+                <div
+                  onClick={handleNext}
+                  className={
+                    `flex h-9 w-9 cursor-pointer items-center justify-center rounded-full ` +
+                    (value >= 124 ? "bg-gray-100" : "bg-gray-200")
+                  }
+                >
+                  <i
+                    className={
+                      `fi fi-rr-arrow-small-right mt-1 text-2xl ` +
+                      (value >= 124 ? "text-gray-300" : "text-gray-800")
+                    }
+                  ></i>
+                </div>
+              </div>
+            </div>
+            <div className="mx-4 mt-5 flex gap-4 hover:cursor-pointer">
+              {offersData.map((data, i) => (
+                <OffersCard data={data} key={i} />
+              ))}
+            </div>
+          </div>
+
+          {/* Menu section */}
+          <div className="mb-5 mt-12 flex w-full items-center justify-center">
+            <p className="text-center text-xs font-bold tracking-[4px] text-gray-900 text-opacity-70">
+              MENU
+            </p>
+          </div>
+
+          {/* search bar */}
+          <div className="flex w-full items-center justify-between rounded-xl bg-gray-200 px-5 py-3">
+            <span></span>
+            <span className="font-medium text-slate-700">
+              Search for dishes
+            </span>
+            <span>
+              <i className="fi fi-rr-search"></i>
+            </span>
           </div>
         </div>
       </div>
