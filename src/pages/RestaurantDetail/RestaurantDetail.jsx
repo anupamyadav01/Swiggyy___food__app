@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import OffersCard from "../../components/OffersCard/OffersCard";
 // import RestaurantData from "../../constants/RestaurantDetails.json";
@@ -10,7 +11,8 @@ const RestaurantDetail = () => {
   const [offersData, setOffersData] = useState([]);
   const [restaurantInfo, setRestaurantInfo] = useState([]);
   const [value, setValue] = useState(0);
-  // console.log(menuData);
+  // const [currentId, setCurrentId] = useState(null);
+  // console.log(menuData?.card);
 
   const fetchRestaurantDetails = async () => {
     try {
@@ -22,13 +24,17 @@ const RestaurantDetail = () => {
       setOffersData(
         results?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers
       );
-      setMenuData(
-        results?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-      );
+
+      let filteredData =
+        results?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+          (data) => data?.card?.card?.itemCards || data?.card?.card?.categories
+        );
+      setMenuData(filteredData);
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(menuData);
 
   useEffect(() => {
     fetchRestaurantDetails();
@@ -36,6 +42,17 @@ const RestaurantDetail = () => {
 
   const handleNext = () => {};
   const handlePrev = () => {};
+
+  // function for single card open
+  // const handleOnClick = (id) => {
+  //   // console.log(id);
+  //   setCurrentId(currentId === id ? null : id);
+  //   console.log(currentId);
+  // };
+
+  // const handleOnClick = () => {
+  //   setIsOpen((prev) => !prev);
+  // };
 
   return (
     <div className="w-full">
@@ -184,10 +201,73 @@ const RestaurantDetail = () => {
               <i className="fi fi-rr-search"></i>
             </span>
           </div>
+
+          <div className="mt-10">
+            {menuData.map(({ card: { card } }) => {
+              return <MenuCard key={card.title} card={card} />;
+            })}
+          </div>
         </div>
       </div>
     </div>
   );
 };
+const MenuCard = ({ card }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleDropDown = () => {
+    setIsOpen((prev) => !prev);
+  };
+  // console.log(itemCards);
+  if (card.itemCards) {
+    const { title, itemCards } = card;
+    return (
+      <div>
+        <div>
+          <h1 className="flex items-center justify-between text-lg font-bold">
+            {title} ({itemCards.length})
+            <span onClick={toggleDropDown}>
+              {isOpen ? (
+                <i className="fi fi-ss-angle-small-up cursor-pointer text-3xl"></i>
+              ) : (
+                <i className="fi fi-ss-angle-small-down cursor-pointer text-3xl"></i>
+              )}
+            </span>
+          </h1>
+        </div>
+        {isOpen && <DetailMenu itemCards={itemCards} />}
+      </div>
+    );
+  } else {
+    const { title, categories } = card;
+    return (
+      <div>
+        <p>{title}</p>
+        <div>
+          {categories.map((data) => {
+            return <MenuCard key={data.title} card={data} />;
+          })}
+        </div>
+      </div>
+    );
+  }
+};
+
+const DetailMenu = ({ itemCards }) => {
+  return (
+    <div className="mx-4 my-4">
+      {itemCards.map(({ card: { info } }) => {
+        return <div key={info.id}>{info.name}</div>;
+      })}
+    </div>
+  );
+};
+
+DetailMenu.propTypes = {
+  itemCards: PropTypes.array
+};
+
+MenuCard.propTypes = {
+  card: PropTypes.object
+};
 export default RestaurantDetail;
