@@ -34,7 +34,7 @@ const RestaurantDetail = () => {
       console.log(error);
     }
   };
-  console.log(menuData);
+  // console.log(menuData);
 
   useEffect(() => {
     fetchRestaurantDetails();
@@ -213,7 +213,14 @@ const RestaurantDetail = () => {
   );
 };
 const MenuCard = ({ card }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  console.log(card);
+
+  let opened = false;
+  if (card["@type"]) {
+    opened = true;
+  }
+
+  const [isOpen, setIsOpen] = useState(opened);
 
   const toggleDropDown = () => {
     setIsOpen((prev) => !prev);
@@ -222,27 +229,47 @@ const MenuCard = ({ card }) => {
   if (card.itemCards) {
     const { title, itemCards } = card;
     return (
-      <div>
+      <>
         <div>
-          <h1 className="flex items-center justify-between text-lg font-bold">
-            {title} ({itemCards.length})
-            <span onClick={toggleDropDown}>
-              {isOpen ? (
-                <i className="fi fi-ss-angle-small-up cursor-pointer text-3xl"></i>
-              ) : (
-                <i className="fi fi-ss-angle-small-down cursor-pointer text-3xl"></i>
-              )}
-            </span>
-          </h1>
+          <div>
+            <div className={"flex items-center justify-between"}>
+              <h1
+                className={
+                  "text-" + (card["@type"] ? "lg font-bold" : "base font-bold")
+                }
+              >
+                {title} ({itemCards.length})
+              </h1>
+              <span onClick={toggleDropDown}>
+                {isOpen ? (
+                  <i className="fi fi-ss-angle-small-up cursor-pointer text-3xl"></i>
+                ) : (
+                  <i className="fi fi-ss-angle-small-down cursor-pointer text-3xl"></i>
+                )}
+              </span>
+            </div>
+          </div>
+          {isOpen && <DetailMenu itemCards={itemCards} />}
         </div>
-        {isOpen && <DetailMenu itemCards={itemCards} />}
-      </div>
+        <div className={"my-5 bg-gray-200 py-2"}></div>
+      </>
     );
-  } else {
+  } else if (card.categories) {
     const { title, categories } = card;
+    // console.log(categories);
+
     return (
       <div>
-        <p>{title}</p>
+        <div className="flex items-center justify-between">
+          <div className="text-lg font-bold">{title}</div>
+          {/* <span onClick={toggleDropDown}>
+            {isOpen ? (
+              <i className="fi fi-ss-angle-small-up cursor-pointer text-3xl"></i>
+            ) : (
+              <i className="fi fi-ss-angle-small-down cursor-pointer text-3xl"></i>
+            )}
+          </span> */}
+        </div>
         <div>
           {categories.map((data) => {
             return <MenuCard key={data.title} card={data} />;
@@ -254,10 +281,15 @@ const MenuCard = ({ card }) => {
 };
 
 const DetailMenu = ({ itemCards }) => {
+  // console.log(itemCards);
   return (
     <div className="mx-4 my-4">
       {itemCards.map(({ card: { info } }) => {
-        return <div key={info.id}>{info.name}</div>;
+        return (
+          <div key={info.id} className="">
+            {info.name}
+          </div>
+        );
       })}
     </div>
   );
