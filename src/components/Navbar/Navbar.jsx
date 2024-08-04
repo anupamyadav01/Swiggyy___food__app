@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const handleLocationFunc = () => {};
+
   return (
     <div className="sticky top-0 z-50 h-20 w-full bg-white px-16 py-4 shadow-md">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between">
@@ -34,7 +36,7 @@ const Navbar = () => {
               </defs>
             </svg>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4" onClick={handleLocationFunc}>
             <p className="cursor-pointer border-b-2 border-b-black font-bold hover:border-b-2 hover:border-b-orange-500 hover:text-orange-500">
               others
             </p>

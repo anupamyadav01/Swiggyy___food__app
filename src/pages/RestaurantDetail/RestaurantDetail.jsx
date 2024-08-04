@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import OffersCard from "../../components/OffersCard/OffersCard";
+import MenuCard from "../../components/MenuCard/MenuCard";
 // import RestaurantData from "../../constants/RestaurantDetails.json";
 const RestaurantDetail = () => {
   const { id } = useParams();
@@ -11,8 +11,6 @@ const RestaurantDetail = () => {
   const [offersData, setOffersData] = useState([]);
   const [restaurantInfo, setRestaurantInfo] = useState([]);
   const [value, setValue] = useState(0);
-  // const [currentId, setCurrentId] = useState(null);
-  // console.log(menuData?.card);
 
   const fetchRestaurantDetails = async () => {
     try {
@@ -40,8 +38,16 @@ const RestaurantDetail = () => {
     fetchRestaurantDetails();
   }, []);
 
-  const handleNext = () => {};
-  const handlePrev = () => {};
+  const handleNext = () => {
+    if (value < menuData.length - 1) {
+      setValue((prev) => prev + 1);
+    }
+  };
+  const handlePrev = () => {
+    if (value > 0) {
+      setValue((prev) => prev - 1);
+    }
+  };
 
   // function for single card open
   // const handleOnClick = (id) => {
@@ -211,95 +217,5 @@ const RestaurantDetail = () => {
       </div>
     </div>
   );
-};
-const MenuCard = ({ card }) => {
-  console.log(card);
-
-  let opened = false;
-  if (card["@type"]) {
-    opened = true;
-  }
-
-  const [isOpen, setIsOpen] = useState(opened);
-
-  const toggleDropDown = () => {
-    setIsOpen((prev) => !prev);
-  };
-  // console.log(itemCards);
-  if (card.itemCards) {
-    const { title, itemCards } = card;
-    return (
-      <>
-        <div>
-          <div>
-            <div className={"flex items-center justify-between"}>
-              <h1
-                className={
-                  "text-" + (card["@type"] ? "lg font-bold" : "base font-bold")
-                }
-              >
-                {title} ({itemCards.length})
-              </h1>
-              <span onClick={toggleDropDown}>
-                {isOpen ? (
-                  <i className="fi fi-ss-angle-small-up cursor-pointer text-3xl"></i>
-                ) : (
-                  <i className="fi fi-ss-angle-small-down cursor-pointer text-3xl"></i>
-                )}
-              </span>
-            </div>
-          </div>
-          {isOpen && <DetailMenu itemCards={itemCards} />}
-        </div>
-        <div className={"my-5 bg-gray-200 py-2"}></div>
-      </>
-    );
-  } else if (card.categories) {
-    const { title, categories } = card;
-    // console.log(categories);
-
-    return (
-      <div>
-        <div className="flex items-center justify-between">
-          <div className="text-lg font-bold">{title}</div>
-          {/* <span onClick={toggleDropDown}>
-            {isOpen ? (
-              <i className="fi fi-ss-angle-small-up cursor-pointer text-3xl"></i>
-            ) : (
-              <i className="fi fi-ss-angle-small-down cursor-pointer text-3xl"></i>
-            )}
-          </span> */}
-        </div>
-        <div>
-          {categories.map((data) => {
-            return <MenuCard key={data.title} card={data} />;
-          })}
-        </div>
-      </div>
-    );
-  }
-};
-
-const DetailMenu = ({ itemCards }) => {
-  // console.log(itemCards);
-  return (
-    <div className="mx-4 my-4">
-      {itemCards.map(({ card: { info } }) => {
-        return (
-          <div key={info.id} className="">
-            {info.name}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-DetailMenu.propTypes = {
-  itemCards: PropTypes.array
-};
-
-MenuCard.propTypes = {
-  card: PropTypes.object
 };
 export default RestaurantDetail;
