@@ -1,10 +1,17 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import LocationContext from "../../router/LocationContext";
 
 const Navbar = () => {
-  const handleLocationFunc = () => {};
+  const handleLocationFunc = () => {
+    setShowLocation((prev) => !prev);
+    // console.log("clicked");
+  };
+  const { setShowLocation } = useContext(LocationContext);
+  // console.log(showLocation);
 
   return (
-    <div className="sticky top-0 z-50 h-20 w-full bg-white px-16 py-4 shadow-md">
+    <div className="sticky top-0 z-20 h-20 w-full bg-white px-16 py-4 shadow-md">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between">
         <div className="flex items-center">
           <Link to={"/"} className="cursor-pointer pr-10">

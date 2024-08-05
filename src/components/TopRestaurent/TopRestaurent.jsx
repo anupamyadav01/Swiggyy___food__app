@@ -72,7 +72,7 @@ const TopRestaurent = () => {
                 </div>
                 <div className="pl-3">
                   <p className="text-lg font-bold">{item.info.name}</p>
-                  <div className="flex items-center gap-1 border border-black">
+                  <div className="flex items-center gap-1">
                     <div>
                       <i className="fi fi-sr-circle-star text-base text-green-600"></i>
                     </div>
