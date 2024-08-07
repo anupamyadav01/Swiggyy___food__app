@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestaurentCard from "../RestaurentCard/RestaurentCard";
-import SwiggyData from "../../constants/SwiggyData.json";
+import { getTopRestaurantsData } from "../../apis";
+import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
+// import SwiggyData from "../../constants/SwiggyData.json";
 const Restaurents = () => {
-  const [food] = useState(
-    SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-      ?.restaurants
-  );
+  // const [food] = useState(
+  //   SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+  //     ?.restaurants
+  // );
   // console.log(food);
+  const {
+    cordinates: { lat, lng }
+  } = useContext(LatitudeAndLogitudeContext);
+  const [food, setFood] = useState([]);
+  useEffect(() => {
+    getTopRestaurantsData(lat, lng)
+      .then((data) => {
+        setFood(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [lat, lng]);
+
   return (
     <div>
       <div>

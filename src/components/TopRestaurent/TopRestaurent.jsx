@@ -1,14 +1,30 @@
-import { useState } from "react";
-import SwiggyData from "../../constants/SwiggyData.json";
+import { useContext, useEffect, useState } from "react";
+// import SwiggyData from "../../constants/SwiggyData.json";
 import { Link } from "react-router-dom";
+import { getTopRestaurantsData } from "../../apis";
+import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
 const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 const TopRestaurent = () => {
   const [value, setValue] = useState(0);
-  const [food] = useState(
-    SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-      ?.restaurants
-  );
+  // const [food] = useState(
+  //   SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+  //     ?.restaurants
+  // );
   // console.log(food);
+  const {
+    cordinates: { lat, lng }
+  } = useContext(LatitudeAndLogitudeContext);
+
+  const [food, setFood] = useState([]);
+  useEffect(() => {
+    getTopRestaurantsData(lat, lng)
+      .then((data) => {
+        setFood(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [lat, lng]);
   const handlePrev = () => {
     if (value <= 47) {
       setValue(0);
@@ -50,51 +66,52 @@ const TopRestaurent = () => {
             transform: `translateX(-${value}%)`
           }}
         >
-          {food.map((item) => {
-            return (
-              <Link
-                key={item.info.id}
-                to={`/restaurant/${item?.cta?.link.split("/").at(-1)}`}
-                className="cursor-pointer duration-100 hover:scale-95"
-              >
-                <div className="relative h-44 overflow-hidden rounded-2xl">
-                  <img
-                    className="min-w-[270px]"
-                    src={IMG_BASE_URL + item.info.cloudinaryImageId}
-                    alt=""
-                  />
-                  <div className="from-1% absolute bottom-0 left-0 flex h-full w-full items-end justify-start bg-gradient-to-t from-black to-transparent to-40% p-2 text-xl font-extrabold uppercase text-white">
-                    {item.info?.aggregatedDiscountInfoV3 &&
-                      item.info?.aggregatedDiscountInfoV3?.header +
-                        " " +
-                        item.info?.aggregatedDiscountInfoV3?.subHeader}
-                  </div>
-                </div>
-                <div className="pl-3">
-                  <p className="text-lg font-bold">{item.info.name}</p>
-                  <div className="flex items-center gap-1">
-                    <div>
-                      <i className="fi fi-sr-circle-star text-base text-green-600"></i>
+          {food &&
+            food.map((item) => {
+              return (
+                <Link
+                  key={item.info.id}
+                  to={`/restaurant/${item?.cta?.link.split("/").at(-1)}`}
+                  className="cursor-pointer duration-100 hover:scale-95"
+                >
+                  <div className="relative h-44 overflow-hidden rounded-2xl">
+                    <img
+                      className="min-w-[270px]"
+                      src={IMG_BASE_URL + item.info.cloudinaryImageId}
+                      alt=""
+                    />
+                    <div className="from-1% absolute bottom-0 left-0 flex h-full w-full items-end justify-start bg-gradient-to-t from-black to-transparent to-40% p-2 text-xl font-extrabold uppercase text-white">
+                      {item.info?.aggregatedDiscountInfoV3 &&
+                        item.info?.aggregatedDiscountInfoV3?.header +
+                          " " +
+                          item.info?.aggregatedDiscountInfoV3?.subHeader}
                     </div>
-                    <p className="flex items-center justify-center">
-                      <span className="mr-2 font-medium">
-                        {item.info.avgRating}{" "}
-                      </span>
-                      •{" "}
-                      <span className="ml-2 font-semibold">
-                        {item.info.sla.slaString}
-                      </span>
-                    </p>
                   </div>
+                  <div className="pl-3">
+                    <p className="text-lg font-bold">{item.info.name}</p>
+                    <div className="flex items-center gap-1">
+                      <div>
+                        <i className="fi fi-sr-circle-star text-base text-green-600"></i>
+                      </div>
+                      <p className="flex items-center justify-center">
+                        <span className="mr-2 font-medium">
+                          {item.info.avgRating}{" "}
+                        </span>
+                        •{" "}
+                        <span className="ml-2 font-semibold">
+                          {item.info.sla.slaString}
+                        </span>
+                      </p>
+                    </div>
 
-                  <div className="line-clamp-1 text-gray-600">
-                    {item.info.cuisines.join(", ")}
+                    <div className="line-clamp-1 text-gray-600">
+                      {item.info.cuisines.join(", ")}
+                    </div>
+                    <div className="text-gray-600">{item.info.areaName}</div>
                   </div>
-                  <div className="text-gray-600">{item.info.areaName}</div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
         </div>
       </div>
     </div>

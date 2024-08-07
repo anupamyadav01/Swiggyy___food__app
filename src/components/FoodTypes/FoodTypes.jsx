@@ -1,13 +1,31 @@
-import { useState } from "react";
-import SwiggyData from "../../constants/SwiggyData.json";
-
+import { useContext, useEffect, useState } from "react";
+// import SwiggyData from "../../constants/SwiggyData.json";
+import { getFoodTypesData } from "../../apis";
+import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
 const FoodTypes = () => {
+  // getting data from JSON
+  // const [food] = useState(
+  //   SwiggyData?.data?.cards[0]?.card?.card?.imageGridCards?.info
+  // );
+  const {
+    cordinates: { lat, lng }
+  } = useContext(LatitudeAndLogitudeContext);
+  // getting data from API
+  const [food, setFood] = useState([]);
+  useEffect(() => {
+    getFoodTypesData(lat, lng)
+      .then((data) => {
+        // console.log(data);
+        setFood(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [lat, lng]);
   const [value, setValue] = useState(0);
   // base URL for images
   const baseURL = "https://media-assets.swiggy.com/swiggy/image/upload";
-  const [food] = useState(
-    SwiggyData?.data?.cards[0]?.card?.card?.imageGridCards?.info
-  );
+
   // console.log(food);
   const handleNext = () => {
     if (value >= 155) return;
@@ -46,16 +64,17 @@ const FoodTypes = () => {
           className="flex duration-1000"
           style={{ transform: `translateX(-${value}%)` }}
         >
-          {food.map((item) => {
-            return (
-              <img
-                key={item.id}
-                className="w-36"
-                src={`${baseURL}/${item.imageId}`}
-                alt=""
-              />
-            );
-          })}
+          {food &&
+            food.map((item) => {
+              return (
+                <img
+                  key={item.id}
+                  className="w-36 object-cover"
+                  src={`${baseURL}/${item.imageId}`}
+                  alt=""
+                />
+              );
+            })}
         </div>
       </div>
     </div>
