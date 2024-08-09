@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AddressContext, LocationContext } from "../../context/SwiggyContext";
-
 const Navbar = () => {
   const handleLocationFunc = () => {
     setShowLocation((prev) => !prev);
