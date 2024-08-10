@@ -1,14 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AddressContext, LocationContext } from "../../context/SwiggyContext";
+import { AddressContext } from "../../context/SwiggyContext";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSearchLocation } from "../../utils/slices/toggleSlice";
 const Navbar = () => {
+  const dispatch = useDispatch();
   const handleLocationFunc = () => {
-    setShowLocation((prev) => !prev);
-    // console.log("clicked");
+    dispatch(toggleSearchLocation());
   };
-  const { setShowLocation } = useContext(LocationContext);
   const { address } = useContext(AddressContext);
-  // console.log(showLocation);
+  const cartItemsCount = useSelector(
+    (state) => state.cartSlice.cartItems.length
+  );
+  // console.log(cartItemsCount);
 
   return (
     <div className="sticky top-0 z-20 h-20 w-full bg-white px-16 py-4 shadow-md">
@@ -45,7 +49,7 @@ const Navbar = () => {
           </Link>
           <div className="flex items-center gap-3" onClick={handleLocationFunc}>
             <p className="cursor-pointer border-b-2 border-b-black font-bold hover:border-b-2 hover:border-b-orange-500 hover:text-orange-500">
-              others
+              Others
             </p>
             <p className="text-sm text-gray-500">{address.substring(0, 38)}</p>
             <i className="fi fi-rr-angle-small-down mt-2 cursor-pointer text-2xl text-orange-600"></i>
@@ -66,7 +70,7 @@ const Navbar = () => {
           <Link to={"/cart"} className="flex cursor-pointer items-center gap-2">
             <i className="fi fi-rr-shopping-cart-add mt-1 text-xl"></i>
             <p className="text-lg font-medium">Cart</p>
-            <p className="text-lg font-medium">0</p>
+            <p className="text-lg font-medium">{cartItemsCount}</p>
           </Link>
         </div>
       </div>

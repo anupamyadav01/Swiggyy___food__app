@@ -1,13 +1,14 @@
-import { Outlet } from "react-router-dom";
-
-function App() {
+import Router from "./router/Router";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+const App = () => {
   return (
-    <div className="w-full">
-      <div className="mx-auto max-w-[75%] py-3">
-        <Outlet />
-      </div>
-    </div>
+    <>
+      <Provider store={store}>
+        <Router />
+      </Provider>
+    </>
   );
-}
+};
 
 export default App;

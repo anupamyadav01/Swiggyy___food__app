@@ -1,30 +1,30 @@
 import { useContext, useEffect, useState } from "react";
-// import SwiggyData from "../../constants/SwiggyData.json";
+import SwiggyData from "../../constants/SwiggyData.json";
 import { Link } from "react-router-dom";
 import { getTopRestaurantsData } from "../../apis";
 import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
 const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 const TopRestaurent = () => {
   const [value, setValue] = useState(0);
-  // const [food] = useState(
-  //   SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-  //     ?.restaurants
-  // );
+  const [food] = useState(
+    SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants
+  );
   // console.log(food);
-  const {
-    cordinates: { lat, lng }
-  } = useContext(LatitudeAndLogitudeContext);
+  // const {
+  //   cordinates: { lat, lng }
+  // } = useContext(LatitudeAndLogitudeContext);
 
-  const [food, setFood] = useState([]);
-  useEffect(() => {
-    getTopRestaurantsData(lat, lng)
-      .then((data) => {
-        setFood(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [lat, lng]);
+  // const [food, setFood] = useState([]);
+  // useEffect(() => {
+  //   getTopRestaurantsData(lat, lng)
+  //     .then((data) => {
+  //       setFood(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [lat, lng]);
   const handlePrev = () => {
     if (value <= 47) {
       setValue(0);

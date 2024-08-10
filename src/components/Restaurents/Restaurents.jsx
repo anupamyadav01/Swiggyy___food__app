@@ -1,27 +1,30 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import RestaurentCard from "../RestaurentCard/RestaurentCard";
 import { getTopRestaurantsData } from "../../apis";
 import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
-// import SwiggyData from "../../constants/SwiggyData.json";
+import SwiggyData from "../../constants/SwiggyData.json";
 const Restaurents = () => {
-  // const [food] = useState(
-  //   SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-  //     ?.restaurants
-  // );
+  // const {
+  //   cordinates: { lat, lng }
+  // } = useContext(LatitudeAndLogitudeContext);
+  const [food, setFood] = useState(
+    SwiggyData.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants
+  );
+
+  // const fetchRestaurants = useCallback(async () => {
+  //   try {
+  //     const data = await getTopRestaurantsData(lat, lng);
+  //     setFood(data);
+  //   } catch (error) {
+  //     console.error("Failed to fetch restaurant data:", error);
+  //   }
+  // }, [lat, lng]);
+
+  // useEffect(() => {
+  //   // fetchRestaurants();
+  // }, [fetchRestaurants]);
   // console.log(food);
-  const {
-    cordinates: { lat, lng }
-  } = useContext(LatitudeAndLogitudeContext);
-  const [food, setFood] = useState([]);
-  useEffect(() => {
-    getTopRestaurantsData(lat, lng)
-      .then((data) => {
-        setFood(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [lat, lng]);
 
   return (
     <div>
@@ -54,9 +57,10 @@ const Restaurents = () => {
         </div>
       </div>
       <div className="flex w-full flex-wrap justify-center gap-7">
-        {food.map((item) => {
-          return <RestaurentCard key={item.info.id} item={item} />;
-        })}
+        {food &&
+          food.map((item) => {
+            return <RestaurentCard key={item.info.id} item={item} />;
+          })}
       </div>
     </div>
   );

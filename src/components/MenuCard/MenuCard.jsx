@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import AddToCartBtn from "../AddToCartBtn/AddToCartBtn";
+import { Toaster } from "react-hot-toast";
 let veg =
   "https://www.pngkey.com/png/detail/261-2619381_chitr-veg-symbol-svg-veg-and-non-veg.png";
 let nonVeg =
@@ -137,15 +139,18 @@ function DetailMenuCard({ info }) {
             <span className="">{description}</span>
           )}
         </div>
-        <div className="relative h-full w-[40%] md:w-[20%]">
+        <div className="relative h-[162px] w-[170px]">
           <img
-            className="aspect-square rounded-xl"
+            className="h-full rounded-xl"
             src={
               "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/" +
               imageId
             }
-            alt=""
           />
+          <div>
+            <AddToCartBtn info={info} />
+            <Toaster />
+          </div>
         </div>
       </div>
       <hr className="my-5" />

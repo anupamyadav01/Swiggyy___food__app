@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import OffersCard from "../../components/OffersCard/OffersCard";
 import MenuCard from "../../components/MenuCard/MenuCard";
-// import RestaurantData from "../../constants/RestaurantDetails.json";
 const RestaurantDetail = () => {
   const { id } = useParams();
   const mainID = id.split("-").at(-1);
@@ -48,18 +47,6 @@ const RestaurantDetail = () => {
       setValue((prev) => prev - 1);
     }
   };
-
-  // function for single card open
-  // const handleOnClick = (id) => {
-  //   // console.log(id);
-  //   setCurrentId(currentId === id ? null : id);
-  //   console.log(currentId);
-  // };
-
-  // const handleOnClick = () => {
-  //   setIsOpen((prev) => !prev);
-  // };
-
   return (
     <div className="w-full">
       <div className="mx-auto my-4 max-w-[800px]">
