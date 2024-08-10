@@ -16,11 +16,25 @@ const getTopRestaurantsData = async (lat, lng) => {
       `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
     );
     const results = await response.json();
-    return results?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-      ?.restaurants;
+    // console.log(results?.data?);
+
+    return results;
   } catch (error) {
     throw new Error("Error while fetchig data", error);
   }
 };
+
+// const getAllData = async (lat, lng) => {
+//   try {
+//     const response = await fetch(
+//       `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
+//     );
+//     const results = await response.json();
+//     return results?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+//       ?.restaurants;
+//   } catch (error) {
+//     throw new Error("Error while fetchig data", error);
+//   }
+// };
 
 export { getFoodTypesData, getTopRestaurantsData };

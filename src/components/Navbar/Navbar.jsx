@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AddressContext } from "../../context/SwiggyContext";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSearchLocation } from "../../utils/slices/toggleSlice";
 const Navbar = () => {
@@ -8,11 +6,12 @@ const Navbar = () => {
   const handleLocationFunc = () => {
     dispatch(toggleSearchLocation());
   };
-  const { address } = useContext(AddressContext);
+  const address = useSelector((state) => state.addressSlice.address);
+  // console.log(address);
+
   const cartItemsCount = useSelector(
     (state) => state.cartSlice.cartItems.length
   );
-  // console.log(cartItemsCount);
 
   return (
     <div className="sticky top-0 z-20 h-20 w-full bg-white px-16 py-4 shadow-md">

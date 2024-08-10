@@ -1,30 +1,35 @@
 import { useContext, useEffect, useState } from "react";
-import SwiggyData from "../../constants/SwiggyData.json";
+// import SwiggyData from "../../constants/SwiggyData.json";
 import { Link } from "react-router-dom";
 import { getTopRestaurantsData } from "../../apis";
 import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
 const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 const TopRestaurent = () => {
   const [value, setValue] = useState(0);
-  const [food] = useState(
-    SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-      ?.restaurants
-  );
+  // const [food] = useState(
+  //   SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+  //     ?.restaurants
+  // );
   // console.log(food);
-  // const {
-  //   cordinates: { lat, lng }
-  // } = useContext(LatitudeAndLogitudeContext);
+  const [title, setTitle] = useState("");
+  const {
+    cordinates: { lat, lng }
+  } = useContext(LatitudeAndLogitudeContext);
 
-  // const [food, setFood] = useState([]);
-  // useEffect(() => {
-  //   getTopRestaurantsData(lat, lng)
-  //     .then((data) => {
-  //       setFood(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [lat, lng]);
+  const [food, setFood] = useState([]);
+  useEffect(() => {
+    getTopRestaurantsData(lat, lng)
+      .then((data) => {
+        setTitle(data?.data?.cards[1]?.card?.card?.header?.title);
+        setFood(
+          data?.data.cards[1].card?.card?.gridElements?.infoWithStyle
+            ?.restaurants
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [lat, lng]);
   const handlePrev = () => {
     if (value <= 47) {
       setValue(0);
@@ -32,7 +37,7 @@ const TopRestaurent = () => {
     }
     setValue((prev) => prev - 45.5);
   };
-  // console.log(value);
+  // console.log(food);
 
   const handleNext = () => {
     if (value >= 501) return;
@@ -41,7 +46,7 @@ const TopRestaurent = () => {
   return (
     <div className="w-full py-4">
       <div className="mb-3 flex w-full items-center justify-between">
-        <p className="text-2xl font-bold">Top restaurant chains in Jaipur</p>
+        <p className="text-2xl font-bold">{title}</p>
         <div className="flex gap-3">
           <span
             onClick={handlePrev}
