@@ -1,60 +1,92 @@
+/* eslint-disable react-refresh/only-export-components */
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import Search from "../pages/Search/Search";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { RxCross2 } from "react-icons/rx";
-import Cart from "../pages/Cart/Cart";
-import Support from "../pages/Support/Support";
-import RestaurantDetail from "../pages/RestaurantDetail/RestaurantDetail";
-import Navbar from "../components/Navbar/Navbar";
-// import Footer from "../components/Footer/Footer";
-import { useEffect, useState } from "react";
-import { LatitudeAndLogitudeContext } from "../context/SwiggyContext";
 import { Provider, useDispatch, useSelector } from "react-redux";
+import { LatitudeAndLogitudeContext } from "../context/SwiggyContext";
 import store from "../utils/store";
-import MainPage from "../pages";
 import { toggleSearchLocation } from "../utils/slices/toggleSlice";
 import { changeAddress } from "../utils/slices/addressSlice";
+import Navbar from "../components/Navbar/Navbar";
+import MainPage from "../pages";
+
+// Lazy loading components for code-splitting
+const Home = React.lazy(() => import("../pages/Home/Home"));
+const Search = React.lazy(() => import("../pages/Search/Search"));
+const Cart = React.lazy(() => import("../pages/Cart/Cart"));
+const Support = React.lazy(() => import("../pages/Support/Support"));
+const RestaurantDetail = React.lazy(
+  () => import("../pages/RestaurantDetail/RestaurantDetail")
+);
 
 const Router = () => {
   const dispatch = useDispatch();
   const [searchData, setSearchData] = useState([]);
   const [query, setQuery] = useState("");
-  // console.log(query);
 
   const [cordinates, setCordinates] = useState({
-    lat: "26.95250",
-    lng: "75.71050"
+    lat: 28.6110886,
+    lng: 77.2345184
   });
+
   const showLocation = useSelector(
     (state) => state.toggleSlice.showLocationToggle
   );
+
   useEffect(() => {
     const handleLocationFunc = async () => {
-      const response = await fetch(
-        `https://www.swiggy.com/dapi/misc/place-autocomplete?input=${query}`
-      );
-      const data = await response.json();
-      setSearchData(data.data);
-      // console.log(data.data);
+      if (query) {
+        const response = await fetch(
+          `https://www.swiggy.com/dapi/misc/place-autocomplete?input=${query}`
+        );
+        const data = await response.json();
+        setSearchData(data.data);
+      }
     };
-    handleLocationFunc();
+
+    const debounceTimer = setTimeout(() => {
+      handleLocationFunc();
+    }, 300); // Adding debounce of 300ms
+
+    return () => clearTimeout(debounceTimer);
   }, [query]);
 
-  const getLatitudeAndLongitude = async (placeID) => {
-    if (!placeID) return;
-    const res = await fetch(
-      `https://www.swiggy.com/dapi/misc/address-recommend?place_id=${placeID}`
-    );
-    const data = await res.json();
-    setCordinates({
-      lat: data?.data[0]?.geometry?.location?.lat,
-      lng: data?.data[0]?.geometry?.location?.lng
-    });
-    dispatch(changeAddress(data?.data[0]?.formatted_address));
+  const getLatitudeAndLongitude = useCallback(
+    async (placeID) => {
+      if (!placeID) return;
+      const res = await fetch(
+        `https://www.swiggy.com/dapi/misc/address-recommend?place_id=${placeID}`
+      );
+      const data = await res.json();
+      setCordinates({
+        lat: data?.data[0]?.geometry?.location?.lat,
+        lng: data?.data[0]?.geometry?.location?.lng
+      });
+      console.log(data?.data[0]?.geometry?.location);
 
-    dispatch(toggleSearchLocation());
-    setQuery("");
-  };
+      dispatch(changeAddress(data?.data[0]?.formatted_address));
+      dispatch(toggleSearchLocation());
+      setQuery(""); // Clear query after selection
+    },
+    [dispatch]
+  );
+
+  const searchResults = useMemo(() => {
+    return searchData.map((item) => (
+      <div
+        onClick={() => getLatitudeAndLongitude(item.place_id)}
+        className="cursor-pointer border-b border-gray-200 p-2"
+        key={item.place_id}
+      >
+        <p className="text-base font-semibold text-gray-800 hover:text-orange-600">
+          {item.structured_formatting.main_text}
+        </p>
+        <p className="text-sm text-gray-400">
+          {item.structured_formatting.secondary_text}
+        </p>
+      </div>
+    ));
+  }, [searchData, getLatitudeAndLongitude]);
 
   return (
     <Provider store={store}>
@@ -90,28 +122,12 @@ const Router = () => {
                         placeholder="Search for area, street name.."
                         className="w-full border-2 border-gray-200 p-3 font-semibold outline-none focus:shadow-lg"
                         onChange={(e) => setQuery(e.target.value)}
+                        value={query}
                       />
                     </div>
                     <div className="px-7">
-                      {searchData ? (
-                        searchData.map((item) => {
-                          return (
-                            <div
-                              onClick={() =>
-                                getLatitudeAndLongitude(item.place_id)
-                              }
-                              className="cursor-pointer border-b border-gray-200 p-2"
-                              key={item.place_id}
-                            >
-                              <p className="text-base font-semibold text-gray-800 hover:text-orange-600">
-                                {item.structured_formatting.main_text}
-                              </p>
-                              <p className="text-sm text-gray-400">
-                                {item.structured_formatting.secondary_text}
-                              </p>
-                            </div>
-                          );
-                        })
+                      {searchData.length > 0 ? (
+                        searchResults
                       ) : (
                         <div className="flex h-full w-full items-center justify-center">
                           <p className="text-2xl font-semibold">
@@ -126,15 +142,20 @@ const Router = () => {
             </div>
 
             <Navbar />
-            <Routes>
-              <Route path="/" element={<MainPage />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/support" element={<Support />} />
-                <Route path="/restaurant/:id" element={<RestaurantDetail />} />
-              </Route>
-            </Routes>
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<MainPage />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/support" element={<Support />} />
+                  <Route
+                    path="/restaurant/:id"
+                    element={<RestaurantDetail />}
+                  />
+                </Route>
+              </Routes>
+            </React.Suspense>
             {/* <Footer /> */}
           </div>
         </LatitudeAndLogitudeContext.Provider>
@@ -143,4 +164,13 @@ const Router = () => {
   );
 };
 
-export default Router;
+// const Router = () => {
+//   return (
+//     <React.Suspense fallback={<div>Loading...</div>}>
+//       <RouterComponent />
+//     </React.Suspense>
+//   );
+// };
+
+const mainRouter = React.memo(Router);
+export default mainRouter;
