@@ -1,72 +1,35 @@
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useState } from "react";
 import RestaurentCard from "../RestaurentCard/RestaurentCard";
-import { getTopRestaurantsData } from "../../apis";
-import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
+import PropTypes from "prop-types";
 import { v4 as generateId } from "uuid";
 import { IoCloseOutline } from "react-icons/io5";
-// import SwiggyData from "../../constants/SwiggyData.json";
-const Restaurents = () => {
-  const {
-    cordinates: { lat, lng }
-  } = useContext(LatitudeAndLogitudeContext);
-  // const [food, setFood] = useState(
-  //   SwiggyData.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-  //     ?.restaurants
+import { useDispatch } from "react-redux";
+import { setFilterData } from "../../utils/slices/filterSlice";
+
+const Restaurents = ({ restaurantData, title }) => {
+  // console.log(restaurantData);
+  const dispatch = useDispatch();
+  // const filterBtnValue = useSelector(
+  //   (state) => state.filterSlice.filterBtnName
   // );
-  const [active, setActive] = useState(null);
-  const [title, setTitle] = useState("");
-  const [food, setFood] = useState([]);
-  const fetchRestaurants = useCallback(async () => {
-    try {
-      const data = await getTopRestaurantsData(lat, lng);
-      setTitle(data?.data?.cards[1]?.card?.card?.header?.title);
+  // console.log(filterBtnValue);
 
-      setFood(
-        data?.data.cards[1].card?.card?.gridElements?.infoWithStyle?.restaurants
-      );
+  const [activeBtn, setActiveBtn] = useState(null);
 
-      console.log(data);
-    } catch (error) {
-      console.error("Failed to fetch restaurant data:", error);
-    }
-  }, [lat, lng]);
-
-  useEffect(() => {
-    fetchRestaurants();
-  }, [fetchRestaurants]);
-  // console.log(food);
   const filterButtons = [
-    {
-      id: generateId(),
-      title: "Clear All Filters"
-    },
-    {
-      id: generateId(),
-      title: "Ratings 4.0+"
-    },
-    {
-      id: generateId(),
-      title: "Fast Delivery"
-    },
-    {
-      id: generateId(),
-      title: "Offers"
-    },
-    {
-      id: generateId(),
-      title: "Rs. 300-Rs. 600"
-    },
-    {
-      id: generateId(),
-      title: "Less than Rs. 300"
-    }
+    { id: generateId(), title: "Clear All Filters" },
+    { id: generateId(), title: "Ratings 4.0+" },
+    { id: generateId(), title: "New on Swiggy" },
+    { id: generateId(), title: "Fast Delivery" },
+    { id: generateId(), title: "Offers" },
+    { id: generateId(), title: "Rs. 300-Rs. 600" },
+    { id: generateId(), title: "Less than Rs. 300" }
   ];
-
   const handleActiveBtn = (btnName) => {
-    // console.log(id);
     if (btnName === "Clear All Filters") return;
-    setActive((prev) => (prev === btnName ? null : btnName));
+    setActiveBtn(activeBtn === btnName ? null : btnName);
   };
+  dispatch(setFilterData(activeBtn));
 
   return (
     <div>
@@ -75,29 +38,34 @@ const Restaurents = () => {
         <div className="mb-10 mt-5 flex gap-3">
           {filterButtons.map((item) => (
             <div
-              key={item.id}
+              key={item.title}
               onClick={() => handleActiveBtn(item.title)}
               style={
-                active === item.title
+                activeBtn === item.title
                   ? { backgroundColor: "#eee", border: "1px solid black" }
                   : null
               }
               className="flex cursor-pointer items-center gap-2 rounded-[18px] border border-gray-300 px-4 py-2 text-gray-800"
             >
               <span className="text-sm font-medium">{item.title}</span>
-              {active === item.title && <IoCloseOutline size={20} />}
+              {activeBtn === item.title && <IoCloseOutline size={20} />}
             </div>
           ))}
         </div>
       </div>
       <div className="flex w-full flex-wrap justify-center gap-7">
-        {food &&
-          food.map((item) => {
+        {restaurantData &&
+          restaurantData.map((item) => {
             return <RestaurentCard key={item.info.id} item={item} />;
           })}
       </div>
     </div>
   );
+};
+
+Restaurents.propTypes = {
+  restaurantData: PropTypes.array,
+  title: PropTypes.string
 };
 
 export default Restaurents;

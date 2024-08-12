@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSearchLocation } from "../../utils/slices/toggleSlice";
+import { setToggleSignIn } from "../../utils/slices/toggleSignInSlice";
+import SignIn from "../SignIn/SignIn";
 const Navbar = () => {
   const dispatch = useDispatch();
   const handleLocationFunc = () => {
     dispatch(toggleSearchLocation());
   };
   const address = useSelector((state) => state.addressSlice.address);
+  const toggleSignIn = useSelector(
+    (state) => state.toggleSignInSlice.toggleSignIn
+  );
+  console.log(toggleSignIn);
+
   // console.log(address);
 
   const cartItemsCount = useSelector(
@@ -62,7 +69,10 @@ const Navbar = () => {
             <i className="fi fi-rr-search mt-1 text-xl"></i>
             <p className="text-lg font-medium">Search</p>
           </Link>{" "}
-          <div className="flex cursor-pointer items-center gap-2">
+          <div
+            onClick={() => dispatch(setToggleSignIn())}
+            className="flex cursor-pointer items-center gap-2"
+          >
             <i className="fi fi-rr-user mt-1 text-xl"></i>
             <p className="text-lg font-medium">Sign in</p>
           </div>{" "}
@@ -73,6 +83,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
+      <SignIn />
     </div>
   );
 };
