@@ -1,48 +1,54 @@
-[
-  {
+{
+  "card": {
     "card": {
-      "card": {
-        "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+      "@type": "type.googleapis.com/swiggy.presentation.food.v2.DishGroup",
+      "restaurant": {
         "info": {
-          "id": "109729",
-          "name": "Crudo'Minos Pizza",
+          "id": "416634",
+          "name": "Scooby Pizza",
           "city": "12",
           "slugs": {
-            "restaurant": "crudominos-pizza-gyan-vihar-jagatpura",
+            "restaurant": "scooby-pizza-c-scheme-c-scheme",
             "city": "jaipur"
           },
-          "cloudinaryImageId": "3ca88e0d887c5f815a97277849d07d41",
-          "address": "46/232, near moti path, rajat path, mansarovar",
-          "locality": "Rajat Path\n",
-          "areaName": "Mansarovar",
-          "costForTwo": "20000",
-          "costForTwoMessage": "₹200 FOR TWO",
-          "cuisines": ["Pizzas", "Italian-American", "Pastas"],
-          "avgRating": 4.2,
+          "cloudinaryImageId": "piszl0j0dee6jcxp4wua",
+          "address": "18 kalayanpuri new sanganer road , Jaipur-II Ward 34, Jaipur, Rajasthan - 302019",
+          "locality": "Sodala",
+          "areaName": "Swej farm,Sodala",
+          "costForTwo": "15000",
+          "costForTwoMessage": "₹150 FOR TWO",
+          "cuisines": ["Pizzas", "Pastas"],
+          "avgRating": 4.5,
           "feeDetails": {},
-          "avgRatingString": "4.2",
-          "totalRatingsString": "5K+",
+          "avgRatingString": "4.5",
+          "totalRatingsString": "50+",
           "promoted": true,
-          "adTrackingId": "cid=16364733~p=0~adgrpid=16364733#ag1~mp=SWIGGY_IN~bl=FOOD~aet=RESTAURANT~aeid=109729~st=pizza~eid=8bdf35c5-8890-4319-a9a5-7bdaa5e260a8~srvts=1723572572422",
+          "adTrackingId": "cid=16365441~p=8~adgrpid=16365441#ag1~mp=SWIGGY_IN~bl=FOOD~aet=RESTAURANT~aeid=416634~st=pizza~eid=a86c4c9c-c1f5-4d77-bf88-840722fc961f~srvts=1723637223774",
           "sla": {
-            "deliveryTime": 49,
+            "deliveryTime": 46,
             "minDeliveryTime": 45,
             "maxDeliveryTime": 50,
-            "lastMileTravel": 6.9,
+            "lastMileTravel": 3,
             "serviceability": "SERVICEABLE",
             "rainMode": "RAIN_MODE_NONE",
             "slaString": "45-50 MINS",
-            "lastMileTravelString": "6.9 km",
+            "lastMileTravelString": "3.0 km",
             "iconType": "ICON_TYPE_EMPTY"
           },
           "availability": {
             "opened": true,
             "restaurantClosedMeta": {}
           },
-          "badges": {},
+          "badges": {
+            "imageBadges": [
+              {
+                "imageId": "v1695133679/badges/Pure_Veg111.png",
+                "description": "pureveg"
+              }
+            ]
+          },
           "aggregatedDiscountInfoV3": {
-            "header": "₹125 OFF",
-            "subHeader": "ABOVE ₹199",
+            "header": "50% OFF",
             "discountTag": "FLAT DEAL"
           },
           "ratingSlab": "RATING_SLAB_5",
@@ -65,327 +71,108 @@
         },
         "analytics": {
           "screenName": "explore",
-          "context": "{\"tid\":\"undefined\",\"grid\":\"fee28050-da98-4db5-a123-ac6fad47810a\",\"queryUniqueId\":\"d39ed60b-5f72-4e19-4b90-aa7de4905097\",\"query\":\"pizza\",\"adTrackingId\":\"cid=16364733~p=0~adgrpid=16364733#ag1~mp=SWIGGY_IN~bl=FOOD~aet=RESTAURANT~aeid=109729~st=pizza~eid=8bdf35c5-8890-4319-a9a5-7bdaa5e260a8~srvts=1723572572422\"}",
-          "objectValue": "109729",
-          "impressionObjectName": "impression-restaurant-ad",
-          "clickObjectName": "click-restaurant-ad"
+          "context": "{\"tid\":\"null\",\"grid\":\"1fb9ae37-2b6e-4ab9-8d9f-47d9d2861d5a\",\"queryUniqueId\":\"c21e36d4-86f3-94f9-462f-5f065b42a2ef\",\"query\":\"pizza\",\"adTrackingId\":\"cid=16365441~p=8~adgrpid=16365441#ag1~mp=SWIGGY_IN~bl=FOOD~aet=RESTAURANT~aeid=416634~st=pizza~eid=a86c4c9c-c1f5-4d77-bf88-840722fc961f~srvts=1723637223774\",\"verticalTiles\":\"158\",\"horizontalTiles\":\"2\"}",
+          "objectValue": "416634",
+          "impressionObjectName": "impression_RIG-ad",
+          "clickObjectName": "click-dish-search-full-menu-ad"
         },
         "ctaWithParams": {
           "link": "swiggy://menu",
           "type": "DEEPLINK",
           "params": {
-            "isSld": "false",
-            "sourceRequestId": "cb3152cccc625b39db15618dabc51ba0",
-            "restaurant_id": "109729",
+            "restaurant_id": "416634",
             "query": "pizza",
-            "sourceSessionId": "finaf2b0-cc42-4e0c-b3f5-18d52ae8c1cf",
-            "source": "SEARCH"
-          }
-        }
-      }
-    }
-  },
-  {
-    "card": {
-      "card": {
-        "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
-        "info": {
-          "id": "480277",
-          "name": "Rominus Pizza And Burger",
-          "city": "12",
-          "slugs": {
-            "restaurant": "rominus-pizza-and-burger-c-scheme-c-scheme",
-            "city": "jaipur"
-          },
-          "cloudinaryImageId": "ba70efdaed93a4f944b2d668c367f3a0",
-          "address": "GROUND FLOOR, SHOP NO. 1, K J CITY TOWER, E-2 ASHOK MARG, C- SCHEME, Jaipur, Rajasthan, 302001",
-          "locality": "Ashok Marg",
-          "areaName": "C Scheme",
-          "costForTwo": "15000",
-          "costForTwoMessage": "₹150 FOR TWO",
-          "cuisines": [
-            "Pizzas",
-            "Italian-American",
-            "Italian",
-            "American",
-            "Desserts",
-            "Beverages",
-            "Fast Food",
-            "Snacks",
-            "Continental",
-            "Bakery"
-          ],
-          "avgRating": 4.4,
-          "feeDetails": {},
-          "avgRatingString": "4.4",
-          "totalRatingsString": "5K+",
-          "sla": {
-            "deliveryTime": 26,
-            "minDeliveryTime": 25,
-            "maxDeliveryTime": 30,
-            "lastMileTravel": 2.3,
-            "serviceability": "SERVICEABLE",
-            "rainMode": "RAIN_MODE_NONE",
-            "slaString": "25-30 MINS",
-            "lastMileTravelString": "2.2 km",
-            "iconType": "ICON_TYPE_EMPTY"
-          },
-          "availability": {
-            "opened": true,
-            "restaurantClosedMeta": {}
-          },
-          "badges": {
-            "imageBadges": [
-              {
-                "imageId": "Rxawards/_CATEGORY-Pizza.png",
-                "description": "Delivery!"
-              }
-            ]
-          },
-          "aggregatedDiscountInfoV3": {
-            "header": "60% OFF",
-            "subHeader": "UPTO ₹120"
-          },
-          "ratingSlab": "RATING_SLAB_5",
-          "orderabilityCommunication": {
-            "title": {},
-            "subTitle": {},
-            "message": {},
-            "customIcon": {}
-          },
-          "cartOrderabilityNudgeBanner": {
-            "parameters": {},
-            "presentation": {}
-          },
-          "externalRatings": {
-            "aggregatedRating": {
-              "rating": "--"
-            }
-          },
-          "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
-        },
-        "analytics": {
-          "screenName": "explore",
-          "context": "{\"tid\":\"undefined\",\"grid\":\"fee28050-da98-4db5-a123-ac6fad47810a\",\"queryUniqueId\":\"d39ed60b-5f72-4e19-4b90-aa7de4905097\",\"query\":\"pizza\"}",
-          "objectValue": "480277",
-          "impressionObjectName": "impression-restaurant",
-          "clickObjectName": "click-restaurant"
-        },
-        "ctaWithParams": {
-          "link": "swiggy://menu",
-          "type": "DEEPLINK",
-          "params": {
-            "query": "pizza",
-            "sourceSessionId": "finaf2b0-cc42-4e0c-b3f5-18d52ae8c1cf",
+            "sourceSessionId": "fj5659d4-c7de-4774-811c-ab58674d7897",
             "source": "SEARCH",
             "isSld": "false",
-            "sourceRequestId": "cb3152cccc625b39db15618dabc51ba0",
-            "restaurant_id": "480277"
+            "sourceRequestId": "66bc9de6642aee30849635006f7843a4",
+            "widgetId": "searchHighConfidenceNearbyRIGWidget"
           }
         }
-      }
-    }
-  },
-  {
-    "card": {
-      "card": {
-        "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
-        "info": {
-          "id": "480277",
-          "name": "Rominus Pizza And Burger",
-          "city": "12",
-          "slugs": {
-            "restaurant": "rominus-pizza-and-burger-c-scheme-c-scheme",
-            "city": "jaipur"
-          },
-          "cloudinaryImageId": "ba70efdaed93a4f944b2d668c367f3a0",
-          "address": "GROUND FLOOR, SHOP NO. 1, K J CITY TOWER, E-2 ASHOK MARG, C- SCHEME, Jaipur, Rajasthan, 302001",
-          "locality": "Ashok Marg",
-          "areaName": "C Scheme",
-          "costForTwo": "15000",
-          "costForTwoMessage": "₹150 FOR TWO",
-          "cuisines": [
-            "Pizzas",
-            "Italian-American",
-            "Italian",
-            "American",
-            "Desserts",
-            "Beverages",
-            "Fast Food",
-            "Snacks",
-            "Continental",
-            "Bakery"
-          ],
-          "avgRating": 4.4,
-          "feeDetails": {},
-          "avgRatingString": "4.4",
-          "totalRatingsString": "5K+",
-          "sla": {
-            "deliveryTime": 26,
-            "minDeliveryTime": 25,
-            "maxDeliveryTime": 30,
-            "lastMileTravel": 2.3,
-            "serviceability": "SERVICEABLE",
-            "rainMode": "RAIN_MODE_NONE",
-            "slaString": "25-30 MINS",
-            "lastMileTravelString": "2.2 km",
-            "iconType": "ICON_TYPE_EMPTY"
-          },
-          "availability": {
-            "opened": true,
-            "restaurantClosedMeta": {}
-          },
-          "badges": {
-            "imageBadges": [
-              {
-                "imageId": "Rxawards/_CATEGORY-Pizza.png",
-                "description": "Delivery!"
+      },
+      "dishes": [
+        {
+          "info": {
+            "id": "124978681",
+            "name": "Corn Pizza",
+            "category": "Pizza",
+            "description": "[7 inches]",
+            "imageId": "4218fffd26545d26a6f523dfa2cb4a5e",
+            "inStock": 1,
+            "isVeg": 1,
+            "price": 16000,
+            "finalPrice": 8000,
+            "variants": {},
+            "variantsV2": {},
+            "maxAddons": -1,
+            "maxFreeAddons": -1,
+            "ribbon": {
+              "text": "BESTSELLER",
+              "textColor": "#ffffff",
+              "topBackgroundColor": "#d53d4c",
+              "bottomBackgroundColor": "#b02331"
+            },
+            "itemBadge": {},
+            "badgesV2": {},
+            "ratings": {
+              "aggregatedRating": {
+                "rating": "4.4",
+                "ratingCount": "24 ratings",
+                "ratingCountV2": "24"
               }
-            ]
-          },
-          "aggregatedDiscountInfoV3": {
-            "header": "60% OFF",
-            "subHeader": "UPTO ₹120"
-          },
-          "ratingSlab": "RATING_SLAB_5",
-          "orderabilityCommunication": {
-            "title": {},
-            "subTitle": {},
-            "message": {},
-            "customIcon": {}
-          },
-          "cartOrderabilityNudgeBanner": {
-            "parameters": {},
-            "presentation": {}
-          },
-          "externalRatings": {
-            "aggregatedRating": {
-              "rating": "--"
             }
           },
-          "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
-        },
-        "analytics": {
-          "screenName": "explore",
-          "context": "{\"tid\":\"undefined\",\"grid\":\"fee28050-da98-4db5-a123-ac6fad47810a\",\"queryUniqueId\":\"d39ed60b-5f72-4e19-4b90-aa7de4905097\",\"query\":\"pizza\"}",
-          "objectValue": "480277",
-          "impressionObjectName": "impression-restaurant",
-          "clickObjectName": "click-restaurant"
-        },
-        "ctaWithParams": {
-          "link": "swiggy://menu",
-          "type": "DEEPLINK",
-          "params": {
-            "query": "pizza",
-            "sourceSessionId": "finaf2b0-cc42-4e0c-b3f5-18d52ae8c1cf",
-            "source": "SEARCH",
-            "isSld": "false",
-            "sourceRequestId": "cb3152cccc625b39db15618dabc51ba0",
-            "restaurant_id": "480277"
+          "analytics": {
+            "screenName": "explore",
+            "context": "{\"tid\":\"null\",\"grid\":\"1fb9ae37-2b6e-4ab9-8d9f-47d9d2861d5a\",\"queryUniqueId\":\"c21e36d4-86f3-94f9-462f-5f065b42a2ef\",\"query\":\"pizza\",\"adTrackingId\":\"cid=16365441~p=8~adgrpid=16365441#ag1~mp=SWIGGY_IN~bl=FOOD~aet=RESTAURANT~aeid=416634~st=pizza~eid=a86c4c9c-c1f5-4d77-bf88-840722fc961f~srvts=1723637223774\",\"verticalTiles\":\"158\",\"horizontalTiles\":\"2\"}",
+            "objectValue": "416634~124978681",
+            "impressionObjectName": "impression_horizontal_end",
+            "clickObjectName": "click-item"
           }
-        }
-      }
-    }
-  },
-  {
-    "card": {
-      "card": {
-        "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
-        "info": {
-          "id": "480277",
-          "name": "Rominus Pizza And Burger",
-          "city": "12",
-          "slugs": {
-            "restaurant": "rominus-pizza-and-burger-c-scheme-c-scheme",
-            "city": "jaipur"
-          },
-          "cloudinaryImageId": "ba70efdaed93a4f944b2d668c367f3a0",
-          "address": "GROUND FLOOR, SHOP NO. 1, K J CITY TOWER, E-2 ASHOK MARG, C- SCHEME, Jaipur, Rajasthan, 302001",
-          "locality": "Ashok Marg",
-          "areaName": "C Scheme",
-          "costForTwo": "15000",
-          "costForTwoMessage": "₹150 FOR TWO",
-          "cuisines": [
-            "Pizzas",
-            "Italian-American",
-            "Italian",
-            "American",
-            "Desserts",
-            "Beverages",
-            "Fast Food",
-            "Snacks",
-            "Continental",
-            "Bakery"
-          ],
-          "avgRating": 4.4,
-          "feeDetails": {},
-          "avgRatingString": "4.4",
-          "totalRatingsString": "5K+",
-          "sla": {
-            "deliveryTime": 26,
-            "minDeliveryTime": 25,
-            "maxDeliveryTime": 30,
-            "lastMileTravel": 2.3,
-            "serviceability": "SERVICEABLE",
-            "rainMode": "RAIN_MODE_NONE",
-            "slaString": "25-30 MINS",
-            "lastMileTravelString": "2.2 km",
-            "iconType": "ICON_TYPE_EMPTY"
-          },
-          "availability": {
-            "opened": true,
-            "restaurantClosedMeta": {}
-          },
-          "badges": {
-            "imageBadges": [
-              {
-                "imageId": "Rxawards/_CATEGORY-Pizza.png",
-                "description": "Delivery!"
+        },
+        {
+          "info": {
+            "id": "124978680",
+            "name": "Onion Pizza",
+            "category": "Pizza",
+            "description": "[7 inches]",
+            "imageId": "b3feb0e3f6ee09f09f0e12f9c5d6fad6",
+            "inStock": 1,
+            "isVeg": 1,
+            "price": 16000,
+            "finalPrice": 8000,
+            "variants": {},
+            "variantsV2": {},
+            "maxAddons": -1,
+            "maxFreeAddons": -1,
+            "ribbon": {
+              "text": "BESTSELLER",
+              "textColor": "#ffffff",
+              "topBackgroundColor": "#d53d4c",
+              "bottomBackgroundColor": "#b02331"
+            },
+            "itemBadge": {},
+            "badgesV2": {},
+            "ratings": {
+              "aggregatedRating": {
+                "rating": "3.7",
+                "ratingCount": "7 ratings",
+                "ratingCountV2": "7"
               }
-            ]
-          },
-          "aggregatedDiscountInfoV3": {
-            "header": "60% OFF",
-            "subHeader": "UPTO ₹120"
-          },
-          "ratingSlab": "RATING_SLAB_5",
-          "orderabilityCommunication": {
-            "title": {},
-            "subTitle": {},
-            "message": {},
-            "customIcon": {}
-          },
-          "cartOrderabilityNudgeBanner": {
-            "parameters": {},
-            "presentation": {}
-          },
-          "externalRatings": {
-            "aggregatedRating": {
-              "rating": "--"
             }
           },
-          "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
-        },
-        "analytics": {
-          "screenName": "explore",
-          "context": "{\"tid\":\"undefined\",\"grid\":\"fee28050-da98-4db5-a123-ac6fad47810a\",\"queryUniqueId\":\"d39ed60b-5f72-4e19-4b90-aa7de4905097\",\"query\":\"pizza\"}",
-          "objectValue": "480277",
-          "impressionObjectName": "impression-restaurant",
-          "clickObjectName": "click-restaurant"
-        },
-        "ctaWithParams": {
-          "link": "swiggy://menu",
-          "type": "DEEPLINK",
-          "params": {
-            "query": "pizza",
-            "sourceSessionId": "finaf2b0-cc42-4e0c-b3f5-18d52ae8c1cf",
-            "source": "SEARCH",
-            "isSld": "false",
-            "sourceRequestId": "cb3152cccc625b39db15618dabc51ba0",
-            "restaurant_id": "480277"
+          "analytics": {
+            "screenName": "explore",
+            "context": "{\"tid\":\"null\",\"grid\":\"1fb9ae37-2b6e-4ab9-8d9f-47d9d2861d5a\",\"queryUniqueId\":\"c21e36d4-86f3-94f9-462f-5f065b42a2ef\",\"query\":\"pizza\",\"adTrackingId\":\"cid=16365441~p=8~adgrpid=16365441#ag1~mp=SWIGGY_IN~bl=FOOD~aet=RESTAURANT~aeid=416634~st=pizza~eid=a86c4c9c-c1f5-4d77-bf88-840722fc961f~srvts=1723637223774\",\"verticalTiles\":\"158\",\"horizontalTiles\":\"2\"}",
+            "objectValue": "416634~124978680",
+            "impressionObjectName": "impression_horizontal_end",
+            "clickObjectName": "click-item"
           }
         }
-      }
+      ],
+      "id": "searchHighConfidenceNearbyRIGWidget",
+      "isMenuVisitable": true,
+      "dishSrpOfferVariantType": "DISH_SRP_OFFER_VARIANT_TYPE_DEFAULT"
     }
   }
-]
+}

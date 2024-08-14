@@ -31,15 +31,15 @@ const SearchPage = () => {
   const [activeTab, setActiveTab] = useState("dishes");
   const [showData, setShowData] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  const [loading, setLoading] = useState(false);
-  // const [dishes, setDishes] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
 
   const searchData = async () => {
     if (searchVal === "") return;
 
     try {
-      setLoading(true);
+      // setLoading(true);
       const [restaurantResult, dishesResult] = await Promise.all([
         getSearchRestaurant(searchVal),
         getDishesData(searchVal)
@@ -48,23 +48,22 @@ const SearchPage = () => {
         restaurantResult?.data?.cards[0]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards?.filter(
           (item) => item?.card?.card?.info
         );
-      // const newRestaurantData =
-      //   restaurantResult?.data?.cards[0]?.groupedCard?.cardGroupMap.RESTAURANT
-      //     .cards;
 
-      // const newDishesData =
-      //   dishesResult?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH.cards;
+      const newDishesData =
+        dishesResult?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH.cards?.filter(
+          (item) => item?.card?.card?.dishes || item?.card?.card?.restaurant
+        );
 
       // console.log("RESTAURANT DATA ", newRestaurantData);
-      // console.log("DISH DATA ", newDishesData);
+      console.log("DISH DATA ", newDishesData);
 
       setRestaurantData(newRestaurantData || []);
-      setLoading(false);
+      // setLoading(false);
       setShowData(true);
-      // setDishes(newDishesData || []);
+      setDishes(newDishesData || []);
     } catch (error) {
       // console.log(error);
-      setLoading(false);
+      // setLoading(false);
     }
   };
   useEffect(() => {
@@ -73,8 +72,6 @@ const SearchPage = () => {
 
   const handleClearSearch = () => {
     setSearchVal("");
-    // setRestaurantData([]);
-    // setDishes([]);
   };
 
   const handleFormSubmit = (e) => {
@@ -134,33 +131,34 @@ const SearchPage = () => {
           {!showData ? (
             <div></div>
           ) : (
-            <div>
+            <div className="w-full">
               <div className="w-full">
-                <div className="mx-auto w-[85%] border-b border-b-gray-300 pb-1 pt-4 text-sm">
+                <div className="mx-auto flex w-[85%] items-center justify-start border-b border-b-gray-200 pb-1 pt-4 text-sm">
                   <button
-                    className={`mr-3 rounded-full px-4 py-2 ${
+                    className={`mr-3 rounded-full px-4 py-2 font-semibold ${
                       activeTab === "restaurants"
                         ? "bg-[#282c3f] text-white"
-                        : "border border-[#282c3f] bg-white text-[#282c3f]"
+                        : "border-2 border-gray-200 bg-white text-[#282c3f]"
                     }`}
                     onClick={() => setActiveTab("restaurants")}
                   >
                     Restaurants
                   </button>
                   <button
-                    className={`rounded-full px-4 py-2 ${activeTab === "dishes" ? "bg-[#282c3f] text-white" : "border border-[#282c3f] bg-white text-[#282c3f]"}`}
+                    className={`rounded-full px-4 py-2 font-semibold ${activeTab === "dishes" ? "bg-[#282c3f] text-white" : "border-2 border-gray-200 bg-white text-[#282c3f]"}`}
                     onClick={() => setActiveTab("dishes")}
                   >
                     Dishes
                   </button>
                 </div>
               </div>
-
-              {activeTab === "dishes" ? (
-                <Dishes restaurantData={restaurantData} />
-              ) : (
-                <SearchRestaurant restaurantData={restaurantData} />
-              )}
+              <div className="mx-auto w-[85%]">
+                {activeTab === "dishes" ? (
+                  <Dishes dishesData={dishes} />
+                ) : (
+                  <SearchRestaurant restaurantData={restaurantData} />
+                )}
+              </div>
             </div>
           )}
         </div>

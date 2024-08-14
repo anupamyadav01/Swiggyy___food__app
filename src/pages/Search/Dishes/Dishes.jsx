@@ -1,15 +1,15 @@
-import SearchRestaurantCard from "../SearchRestaurant/RestaurantSearchCard";
+/* eslint-disable react/prop-types */
 
-const Dishes = ({ restaurantData }) => {
+import RestaurantCard from "./RestaurantCard";
+
+const Dishes = ({ dishesData }) => {
+  console.log(dishesData);
+
   return (
-    <div>
-      {" "}
-      <div className="mx-auto grid w-[85%] grid-cols-2 gap-6 bg-[#eee] px-4 py-8">
-        {restaurantData.map((item, index) => (
-          <SearchRestaurantCard key={index} restaurant={item} />
-        ))}
-        sdfa
-      </div>
+    <div className="grid w-full grid-cols-1 gap-10 bg-gray-100 px-4 py-8">
+      {dishesData.map((item, index) => (
+        <RestaurantCard key={index} data={item} />
+      ))}
     </div>
   );
 };

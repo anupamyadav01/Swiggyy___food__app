@@ -44,7 +44,7 @@ const getSearchRestaurant = async (searchQuery) => {
 const getDishesData = async (searchQuery) => {
   try {
     const response = await fetch(
-      `https://www.swiggy.com/dapi/restaurants/search/v3?lat=26.9124336&lng=75.7872709&str=${searchQuery}&trackingId=null&submitAction=SUGGESTION&queryUniqueId=c9ab3a26-b88a-5e2b-c5b1-791bdf2b80df&metaData=%7B%22type%22%3A%22DISH%22%2C%22data%22%3A%7B%22vegIdentifier%22%3A%22NA%22%2C%22cloudinaryId%22%3A%22jcgm3y2tv77mgi48cc4q%22%2C%22dishFamilyId%22%3A%22846565%22%2C%22dishPreparationStyleId%22%3A%22848841%22%2C%22dishFamilyIds%22%3A%5B%22846565%22%5D%2C%22dishPreparationStyleIds%22%3A%5B%22848841%22%5D%7D%2C%22businessCategory%22%3A%22SWIGGY_FOOD%22%2C%22displayLabel%22%3A%22Dish%22%7D`
+      `https://www.swiggy.com/dapi/restaurants/search/v3?lat=26.9124336&lng=75.7872709&str=${searchQuery}&trackingId=null&submitAction=ENTER&queryUniqueId=c21e36d4-86f3-94f9-462f-5f065b42a2ef`
     );
     const data = response.json();
     // console.log(data);
