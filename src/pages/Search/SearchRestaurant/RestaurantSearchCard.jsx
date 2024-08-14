@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const SearchRestaurantCard = ({ restaurant }) => {
-  console.log(restaurant);
+  // console.log(restaurant);
 
   const {
     name,
@@ -19,9 +19,9 @@ const SearchRestaurantCard = ({ restaurant }) => {
   const flatDeal = aggregatedDiscountInfoV3?.discountTag;
 
   return (
-    <div className="flex w-full max-w-lg rounded-lg border bg-white p-4 shadow-md">
+    <div className="flex w-full max-w-lg rounded-lg border bg-white p-4">
       {/* Left Side Image with Offer */}
-      <div className="relative h-28 w-28 flex-shrink-0">
+      <div className="relative h-28 w-[28%] flex-shrink-0">
         <img
           src={imageUrl}
           alt={name}
@@ -29,12 +29,12 @@ const SearchRestaurantCard = ({ restaurant }) => {
         />
         <div className="absolute -bottom-2 left-1/2 flex w-2/3 -translate-x-1/2 flex-col items-center justify-center whitespace-nowrap shadow">
           {flatDeal && (
-            <div className="w-[80%] rounded-t-xl bg-[#ED5E0E] py-1 text-center text-xs font-semibold text-white">
+            <div className="w-[80%] bg-[#ED5E0E] py-1 text-center text-[10px] font-semibold text-white">
               {flatDeal}
             </div>
           )}
           {offerText && (
-            <div className="flex flex-col items-center rounded bg-white px-2 py-1 leading-none text-orange-600">
+            <div className="flex flex-col items-center rounded bg-white px-2 py-1 leading-none text-red-500">
               <span className="text-[15px] font-bold">{offerText}</span>
               {subheader && (
                 <div className="mt-1 flex items-center justify-center gap-1">
@@ -49,21 +49,25 @@ const SearchRestaurantCard = ({ restaurant }) => {
       </div>
 
       {/* Right Side Information */}
-      <div className="ml-4 flex flex-col justify-center whitespace-nowrap">
-        <h3 className="truncate text-lg font-semibold">{name}</h3>
-        <div className="flex items-center text-xs font-medium text-gray-600">
-          <span className="">
-            {" "}
-            <span className="mr-1 text-sm">★</span>
-            {avgRatingString}
-          </span>
-          <span className="mx-1">•</span>
-          <span className="">{slaString}</span>
-          <span className="mx-1">•</span>
-          <span>{costForTwoMessage}</span>
-        </div>
-        <div className="line-clamp-1 truncate text-xs text-gray-500">
-          {cuisines.join(", ").substring(0, 50)}
+      <div className="flex w-[70%]">
+        <div className="ml-4 flex w-full flex-col justify-center whitespace-nowrap">
+          <h3 className="truncate text-lg font-semibold">{name}</h3>
+          <div className="flex items-center text-xs font-medium text-gray-600">
+            <span className="">
+              {" "}
+              <span className="mr-1 text-sm">★</span>
+              {avgRatingString}
+            </span>
+            <span className="mx-1">•</span>
+            <span className="">{slaString}</span>
+            <span className="mx-1">•</span>
+            <span>{costForTwoMessage}</span>
+          </div>
+          <div className="">
+            <p className="line-clamp-1 text-sm text-gray-500">
+              {cuisines.join(", ")}
+            </p>
+          </div>
         </div>
       </div>
     </div>
