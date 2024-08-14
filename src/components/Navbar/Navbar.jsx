@@ -9,10 +9,10 @@ const Navbar = () => {
     dispatch(toggleSearchLocation());
   };
   const address = useSelector((state) => state.addressSlice.address);
-  const toggleSignIn = useSelector(
-    (state) => state.toggleSignInSlice.toggleSignIn
-  );
-  console.log(toggleSignIn);
+  // const toggleSignIn = useSelector(
+  //   (state) => state.toggleSignInSlice.toggleSignIn
+  // );
+  // console.log(toggleSignIn);
 
   // console.log(address);
 

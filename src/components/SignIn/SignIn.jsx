@@ -21,12 +21,12 @@ const AuthPage = () => {
 
       // setUser(user);
       // setShowLoginBox(false);
-      console.log(user);
+      // console.log(user);
     } catch (error) {
       console.log("error while logging" + error);
     }
   };
-  console.log(toggleSignIn);
+  // console.log(toggleSignIn);
   const dispatch = useDispatch();
   const handleSetLogin = () => {};
 

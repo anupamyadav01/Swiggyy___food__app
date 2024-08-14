@@ -12,7 +12,7 @@ import MainPage from "../pages";
 
 // Lazy loading components for code-splitting
 const Home = React.lazy(() => import("../pages/Home/Home"));
-const Search = React.lazy(() => import("../pages/Search/Search"));
+const SearchPage = React.lazy(() => import("../pages/Search/SearchPage"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart"));
 const Support = React.lazy(() => import("../pages/Support/Support"));
 const RestaurantDetail = React.lazy(
@@ -146,7 +146,7 @@ const Router = () => {
               <Routes>
                 <Route path="/" element={<MainPage />}>
                   <Route path="/" element={<Home />} />
-                  <Route path="/search" element={<Search />} />
+                  <Route path="/search" element={<SearchPage />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/support" element={<Support />} />
                   <Route
@@ -163,14 +163,6 @@ const Router = () => {
     </Provider>
   );
 };
-
-// const Router = () => {
-//   return (
-//     <React.Suspense fallback={<div>Loading...</div>}>
-//       <RouterComponent />
-//     </React.Suspense>
-//   );
-// };
 
 const mainRouter = React.memo(Router);
 export default mainRouter;
