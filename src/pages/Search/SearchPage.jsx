@@ -72,6 +72,9 @@ const SearchPage = () => {
 
   const handleClearSearch = () => {
     setSearchVal("");
+    setRestaurantData([]);
+    setDishes([]);
+    setShowData(false);
   };
 
   const handleFormSubmit = (e) => {

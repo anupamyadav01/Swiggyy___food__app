@@ -35,7 +35,7 @@ const Restaurents = ({ restaurantData, title }) => {
     <div>
       <div>
         <p className="text-2xl font-bold">{title}</p>
-        <div className="mb-10 mt-5 flex gap-3">
+        <div className="mb-10 mt-5 flex flex-wrap gap-3">
           {filterButtons.map((item) => (
             <div
               key={item.title}
@@ -47,13 +47,15 @@ const Restaurents = ({ restaurantData, title }) => {
               }
               className="flex cursor-pointer items-center gap-2 rounded-[18px] border border-gray-300 px-4 py-2 text-gray-800"
             >
-              <span className="text-sm font-medium">{item.title}</span>
+              <span className="text-xs font-medium sm:text-sm">
+                {item.title}
+              </span>
               {activeBtn === item.title && <IoCloseOutline size={20} />}
             </div>
           ))}
         </div>
       </div>
-      <div className="flex w-full flex-wrap justify-center gap-7">
+      <div className="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {restaurantData &&
           restaurantData.map((item) => {
             return <RestaurentCard key={item.info.id} item={item} />;

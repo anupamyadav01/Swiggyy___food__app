@@ -10,7 +10,7 @@ const Home = () => {
   const filterBtnName = useSelector((state) => state.filterSlice.filterBtnName);
   const [title, setTitle] = useState("");
   const [restaurantData, setRestaurantData] = useState([]);
-  const filteredData = restaurantData.filter((item) => {
+  const filteredData = restaurantData?.filter((item) => {
     // console.log(item?.info?.costForTwo);
 
     switch (filterBtnName) {

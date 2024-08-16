@@ -9,6 +9,7 @@ import { toggleSearchLocation } from "../utils/slices/toggleSlice";
 import { changeAddress } from "../utils/slices/addressSlice";
 import Navbar from "../components/Navbar/Navbar";
 import MainPage from "../pages";
+import Shimmer from "../components/Shimmer/Shimmer";
 
 // Lazy loading components for code-splitting
 const Home = React.lazy(() => import("../pages/Home/Home"));
@@ -142,7 +143,7 @@ const Router = () => {
             </div>
 
             <Navbar />
-            <React.Suspense fallback={<div>Loading...</div>}>
+            <React.Suspense fallback={<Shimmer />}>
               <Routes>
                 <Route path="/" element={<MainPage />}>
                   <Route path="/" element={<Home />} />
