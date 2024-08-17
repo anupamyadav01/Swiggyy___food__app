@@ -22,7 +22,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="h-full w-full">
       {cartData.length > 0 ? (
         <div className="relative flex w-full">
           <div className="grid w-4/5 grid-cols-4 gap-4">
@@ -133,8 +133,8 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <div className="flex w-full flex-col items-center justify-center">
-          <div className="w-96">
+        <div className="relative top-[100px] flex w-full flex-col items-center justify-center">
+          <div className="w-60">
             <img
               className="w-full rounded-xl"
               src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0"

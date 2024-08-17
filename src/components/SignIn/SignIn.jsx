@@ -6,8 +6,13 @@ import Login_logo from "../../assets/signin_logo.webp";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../services/firebase.config";
+import { useState } from "react";
+import { updateUser } from "../../utils/slices/userSlice";
 
-const AuthPage = () => {
+const SignIn = () => {
+  const dispatch = useDispatch();
+  const [showLoginBox, setShowLoginBox] = useState(false);
+  const [user, setUser] = useState({});
   const isLogin = true;
   const isSubmitting = false;
   const toggleSignIn = useSelector(
@@ -17,23 +22,19 @@ const AuthPage = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      // localStorage.setItem("user", JSON.stringify(user));
-
-      // setUser(user);
-      // setShowLoginBox(false);
-      // console.log(user);
+      dispatch(updateUser(user));
+      setShowLoginBox(false);
+      console.log(user);
     } catch (error) {
       console.log("error while logging" + error);
     }
   };
-  // console.log(toggleSignIn);
-  const dispatch = useDispatch();
   const handleSetLogin = () => {};
 
   return (
     <>
       <div
-        className={`fixed right-0 top-0 z-30 h-screen w-full overflow-y-scroll bg-white p-4 transition-all duration-500 sm:w-[50%] md:p-8 lg:w-[35%] ${
+        className={`fixed right-0 top-0 z-[60] h-screen w-full overflow-y-scroll bg-white p-4 transition-all duration-500 sm:w-[50%] md:p-8 lg:w-[35%] ${
           toggleSignIn ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -113,4 +114,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default SignIn;

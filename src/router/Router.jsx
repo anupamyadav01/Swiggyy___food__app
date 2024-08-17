@@ -107,9 +107,9 @@ const Router = () => {
 
               <div
                 style={{ transform: showLocation && "translateX(0)" }}
-                className="absolute left-0 z-50 h-screen w-[500px] -translate-x-[500px] border border-black bg-white duration-500"
+                className="absolute left-0 z-[60] h-screen w-[500px] -translate-x-[500px] border border-black bg-white duration-500"
               >
-                <div className="h-full w-full border border-black px-14 py-6">
+                <div className="h-full w-full px-14 py-6">
                   <div className="flex flex-col gap-5">
                     <div>
                       <RxCross2

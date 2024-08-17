@@ -4,6 +4,7 @@ import cartSlice from "./slices/cartSlice";
 import addressSlice from "./slices/addressSlice";
 import filterSlice from "./slices/filterSlice";
 import toggleSignInSlice from "./slices/toggleSignInSlice";
+import userSlice from "./slices/userSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     cartSlice,
     addressSlice,
     filterSlice,
-    toggleSignInSlice
+    toggleSignInSlice,
+    userSlice
   }
 });
 
