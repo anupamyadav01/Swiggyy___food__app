@@ -14,6 +14,10 @@ const Navbar = () => {
     dispatch(toggleSearchLocation());
   };
   const address = useSelector((state) => state.addressSlice.address);
+  const { displayName, photoURL, email } = useSelector(
+    (state) => state.userSlice.user
+  );
+  console.log(displayName, photoURL, email);
 
   const cartItemsCount = useSelector(
     (state) => state.cartSlice.cartItems.length
