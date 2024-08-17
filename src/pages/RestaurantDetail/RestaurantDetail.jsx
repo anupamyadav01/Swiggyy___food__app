@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import OffersCard from "../../components/OffersCard/OffersCard";
-import MenuCard from "../../components/MenuCard/MenuCard";
+import MenuItems from "./MenuItems";
 const RestaurantDetail = () => {
   const { id } = useParams();
   const mainID = id.split("-").at(-1);
@@ -9,6 +9,7 @@ const RestaurantDetail = () => {
   const [menuData, setMenuData] = useState([]);
   const [offersData, setOffersData] = useState([]);
   const [restaurantInfo, setRestaurantInfo] = useState([]);
+
   const [value, setValue] = useState(0);
 
   const fetchRestaurantDetails = async () => {
@@ -17,6 +18,7 @@ const RestaurantDetail = () => {
         `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.9124336&lng=75.7872709&restaurantId=${mainID}&catalog_qa=undefined&submitAction=ENTER`
       );
       const results = await response.json();
+      // console.log(results?.data?.cards[2]?.card?.card?.info);
       setRestaurantInfo(results?.data?.cards[2]?.card?.card?.info);
       setOffersData(
         results?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers
@@ -31,7 +33,6 @@ const RestaurantDetail = () => {
       console.log(error);
     }
   };
-  // console.log(menuData);
 
   useEffect(() => {
     fetchRestaurantDetails();
@@ -197,7 +198,13 @@ const RestaurantDetail = () => {
 
           <div className="mt-10">
             {menuData.map(({ card: { card } }) => {
-              return <MenuCard key={card.title} card={card} />;
+              return (
+                <MenuItems
+                  key={card.title}
+                  restaurantInfo={restaurantInfo}
+                  card={card}
+                />
+              );
             })}
           </div>
         </div>

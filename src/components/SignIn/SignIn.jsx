@@ -6,13 +6,11 @@ import Login_logo from "../../assets/signin_logo.webp";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../services/firebase.config";
-import { useState } from "react";
 import { updateUser } from "../../utils/slices/userSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const [showLoginBox, setShowLoginBox] = useState(false);
-  const [user, setUser] = useState({});
   const isLogin = true;
   const isSubmitting = false;
   const toggleSignIn = useSelector(
@@ -23,8 +21,8 @@ const SignIn = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       dispatch(updateUser(user));
-      setShowLoginBox(false);
-      console.log(user);
+      dispatch(setToggleSignIn());
+      toast.success("Login Successfully");
     } catch (error) {
       console.log("error while logging" + error);
     }
@@ -109,6 +107,7 @@ const SignIn = () => {
             </div>
           </div>
         </form>
+        <Toaster />
       </div>
     </>
   );
