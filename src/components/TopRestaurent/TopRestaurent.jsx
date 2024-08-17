@@ -79,6 +79,7 @@ const TopRestaurent = () => {
                   to={`/restaurant/${item?.cta?.link.split("/").at(-1)}`}
                   className="cursor-pointer duration-100 hover:scale-95"
                 >
+                  {console.log(item)}
                   <div className="relative h-44 overflow-hidden rounded-2xl">
                     <img
                       className="min-w-[270px]"

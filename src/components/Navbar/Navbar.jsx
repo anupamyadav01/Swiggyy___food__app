@@ -21,7 +21,7 @@ const Navbar = () => {
   };
   const address = useSelector((state) => state.addressSlice.address);
   const user = useSelector((state) => state?.userSlice?.user);
-  console.log(user);
+  // console.log(user);
   const cartItemsCount = useSelector(
     (state) => state.cartSlice.cartItems.length
   );

@@ -9,10 +9,6 @@ import { setFilterData } from "../../utils/slices/filterSlice";
 const Restaurents = ({ restaurantData, title }) => {
   // console.log(restaurantData);
   const dispatch = useDispatch();
-  // const filterBtnValue = useSelector(
-  //   (state) => state.filterSlice.filterBtnName
-  // );
-  // console.log(filterBtnValue);
 
   const [activeBtn, setActiveBtn] = useState(null);
 

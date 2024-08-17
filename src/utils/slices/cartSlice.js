@@ -15,13 +15,15 @@ const cartSlice = createSlice({
       const newCartItems = state.cartItems.filter(
         (item) => item.id !== action.payload
       );
-      // console.log(newCartItems);
+      // console.log(newCartItems.length);
+      if (newCartItems.length < 1) localStorage.removeItem("restaurantInfo");
       state.cartItems = newCartItems;
       localStorage.setItem("cartItems", JSON.stringify(newCartItems));
     },
     clearCart: (state) => {
       state.cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify([]));
+      localStorage.removeItem("restaurantInfo");
     },
     increaseItem: (state, action) => {},
     decreaseItem: (state, action) => {}

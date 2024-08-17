@@ -3,31 +3,47 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../utils/slices/cartSlice";
 import PropTypes from "prop-types";
 import toast, { Toaster } from "react-hot-toast";
+import { toggleDifferentRestaurant } from "../../utils/slices/toggleSlice";
 
 function AddToCartBtn({ info, restaurantInfo }) {
   const dispatch = useDispatch();
+  // const showCartCheckingPopup = useSelector(
+  //   (state) => state.toggleSlice.showDifferentRestaurant
+  // );
   const cartItems = useSelector((state) => state.cartSlice.cartItems);
   const handleAddToCart = () => {
-    console.log(restaurantInfo);
     const resInfoLocalStorage = JSON.parse(
       localStorage.getItem("restaurantInfo")
     );
+    // console.log(restaurantInfo);
+    // console.log(resInfoLocalStorage);
+
     const isItemAdded = cartItems.find((item) => item.id === info.id);
     if (!isItemAdded) {
-      if (resInfoLocalStorage.name === restaurantInfo.name) {
+      if (
+        resInfoLocalStorage?.name === restaurantInfo?.name ||
+        !resInfoLocalStorage
+      ) {
         dispatch(addToCart(info));
         localStorage.setItem("restaurantInfo", JSON.stringify(restaurantInfo));
         toast.success("Item added to cart", {
-          position: "top-right"
+          style: {
+            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" // Removes the shadow completely
+          }
         });
       } else {
+        dispatch(toggleDifferentRestaurant());
         toast.error("Different Restaurant Item", {
-          position: "top-right"
+          style: {
+            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" // Removes the shadow completely
+          }
         });
       }
     } else {
-      toast.success("Item already added to cart", {
-        position: "top-right"
+      toast.error("Item already added to cart", {
+        style: {
+          boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" // Removes the shadow completely
+        }
       });
     }
   };

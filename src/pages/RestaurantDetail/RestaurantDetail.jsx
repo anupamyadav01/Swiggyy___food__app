@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import OffersCard from "../../components/OffersCard/OffersCard";
 import MenuItems from "./MenuItems";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../utils/slices/cartSlice";
+import { toggleDifferentRestaurant } from "../../utils/slices/toggleSlice";
 const RestaurantDetail = () => {
   const { id } = useParams();
   const mainID = id.split("-").at(-1);
-
+  const dispatch = useDispatch();
   const [menuData, setMenuData] = useState([]);
   const [offersData, setOffersData] = useState([]);
   const [restaurantInfo, setRestaurantInfo] = useState([]);
+  const showCartCheckingPopup = useSelector(
+    (state) => state.toggleSlice.showDifferentRestaurant
+  );
 
   const [value, setValue] = useState(0);
 
-  const fetchRestaurantDetails = async () => {
+  const fetchRestaurantDetails = useCallback(async () => {
     try {
       const response = await fetch(
         `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.9124336&lng=75.7872709&restaurantId=${mainID}&catalog_qa=undefined&submitAction=ENTER`
@@ -32,11 +38,11 @@ const RestaurantDetail = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [mainID]);
 
   useEffect(() => {
     fetchRestaurantDetails();
-  }, []);
+  }, [fetchRestaurantDetails]);
 
   const handleNext = () => {
     if (value < menuData.length - 1) {
@@ -49,7 +55,7 @@ const RestaurantDetail = () => {
     }
   };
   return (
-    <div className="w-full">
+    <div className="relative w-full">
       <div className="mx-auto my-4 max-w-[800px]">
         {/* bread crumb */}
         <div className="mb-9 flex gap-2 text-[11px] text-gray-400">
@@ -209,6 +215,34 @@ const RestaurantDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* cart ckecking box  */}
+      {showCartCheckingPopup && (
+        <div className="fixed bottom-10 left-[33%] z-50 flex h-[204px] w-[550px] flex-col gap-2 border bg-white p-8 py-5 shadow-[0_0_15px_6px_rgba(0,0,0,0.35)]">
+          <h1 className="text-xl font-bold">Items already in cart</h1>
+          <p className="text-base font-normal text-gray-500">
+            Your cart contains items from other restaurant. Would you like to
+            reset your cart for adding items from this restaurant?
+          </p>
+          <div className="mt-5 flex w-full justify-between gap-3 uppercase">
+            <button
+              onClick={() => dispatch(toggleDifferentRestaurant())}
+              className="w-1/2 border-2 border-green-600 py-3 text-green-600"
+            >
+              No
+            </button>
+            <button
+              onClick={() => {
+                dispatch(clearCart());
+                dispatch(toggleDifferentRestaurant());
+              }}
+              className="w-1/2 bg-green-600 py-3 text-white"
+            >
+              Yes, start Afresh
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

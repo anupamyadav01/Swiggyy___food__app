@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const RestaurantCard = ({ item }) => {
   const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 
   return (
-    <div
+    <Link
+      to={`/restaurant/${item?.cta?.link.split("/").at(-1)}`}
       key={item.info.id}
       className="cursor-pointer duration-100 hover:scale-95"
     >
@@ -37,7 +39,7 @@ const RestaurantCard = ({ item }) => {
         </div>
         <div className="text-gray-600">{item.info.areaName}</div>
       </div>
-    </div>
+    </Link>
   );
 };
 
