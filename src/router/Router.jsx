@@ -9,8 +9,12 @@ import { toggleSearchLocation } from "../utils/slices/toggleSlice";
 import { changeAddress } from "../utils/slices/addressSlice";
 import Navbar from "../components/Navbar/Navbar";
 import MainPage from "../pages";
-import Shimmer from "../components/Shimmer/Shimmer";
+// import Shimmer from "../components/Shimmer/Shimmer/Shimmer.jsx";
 import Footer from "../components/Footer/Footer.jsx";
+import {
+  CircleSkeleton,
+  RectangleSkeleton
+} from "../components/Shimmer/Shimmer/Shimmer.jsx";
 
 // Lazy loading components for code-splitting
 const Home = React.lazy(() => import("../pages/Home/index.jsx"));
@@ -141,7 +145,14 @@ const Router = () => {
             </div>
 
             <Navbar />
-            <React.Suspense fallback={<Shimmer />}>
+            <React.Suspense
+              fallback={
+                <div className="mx-auto w-[80%]">
+                  <CircleSkeleton />
+                  <RectangleSkeleton />
+                </div>
+              }
+            >
               <Routes>
                 <Route path="/" element={<MainPage />}>
                   <Route path="/" element={<Home />} />

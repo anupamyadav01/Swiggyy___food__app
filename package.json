@@ -1,5 +1,5 @@
 {
-  "name": "Swiggyy",
+  "name": "swiggyy",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,6 +16,7 @@
     "classnames": "^2.5.1",
     "firebase": "^10.12.5",
     "lucide-react": "^0.427.0",
+    "primereact": "^10.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",

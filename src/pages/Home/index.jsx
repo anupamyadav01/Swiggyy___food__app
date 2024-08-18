@@ -5,8 +5,13 @@ import TopRestaurent from "./TopRestaurants/TopRestaurants";
 import { getTopRestaurantsData } from "../../apis/index";
 import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
 import { useSelector } from "react-redux";
+import {
+  CircleSkeleton,
+  RectangleSkeleton
+} from "../../components/Shimmer/Shimmer/Shimmer";
 
 const Home = () => {
+  const [loading, setLoading] = useState(false);
   const filterBtnName = useSelector((state) => state.filterSlice.filterBtnName);
   const [title, setTitle] = useState("");
   const [restaurantData, setRestaurantData] = useState([]);
@@ -48,6 +53,7 @@ const Home = () => {
   // *****************************************
 
   useEffect(() => {
+    setLoading(true);
     getTopRestaurantsData(lat, lng)
       .then((data) => {
         setTitle(data?.data?.cards[1]?.card?.card?.header?.title);
@@ -55,9 +61,11 @@ const Home = () => {
           data?.data.cards[1].card?.card.gridElements?.infoWithStyle
             ?.restaurants
         );
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   }, [lat, lng]);
 
@@ -80,38 +88,47 @@ const Home = () => {
   // }, []);
 
   return (
-    <div className="w-full">
-      {/* food types carousel */}
-      <FoodTypes />
-      {/* horizontal line */}
-      <div className="w-full">
-        <hr className="mb-8 mt-10" />
-      </div>
+    <>
+      {loading ? (
+        <div>
+          <CircleSkeleton />
+          <RectangleSkeleton />
+        </div>
+      ) : (
+        <div className="w-full">
+          {/* food types carousel */}
+          <FoodTypes />
+          {/* horizontal line */}
+          <div className="w-full">
+            <hr className="mb-8 mt-10" />
+          </div>
 
-      {/* Top Restaurant Carousel */}
-      <TopRestaurent />
+          {/* Top Restaurant Carousel */}
+          <TopRestaurent />
 
-      {/* All restaurant section  */}
-      <div className="w-full">
-        <hr className="mb-9 mt-10" />
-      </div>
-      <div className="w-full">
-        <AllRestaurants
-          restaurantData={
-            filterBtnName ? (
-              filteredData ? (
-                filteredData
-              ) : (
-                <div>No data found</div>
-              )
-            ) : (
-              restaurantData
-            )
-          }
-          title={title}
-        />
-      </div>
-    </div>
+          {/* All restaurant section  */}
+          <div className="w-full">
+            <hr className="mb-9 mt-10" />
+          </div>
+          <div className="w-full">
+            <AllRestaurants
+              restaurantData={
+                filterBtnName ? (
+                  filteredData ? (
+                    filteredData
+                  ) : (
+                    <div>No data found</div>
+                  )
+                ) : (
+                  restaurantData
+                )
+              }
+              title={title}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

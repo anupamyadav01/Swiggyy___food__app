@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { getDishesData, getSearchRestaurant } from "../../apis";
 import SearchRestaurant from "./SearchRestaurant/SearchRestaurant";
 import Dishes from "./Dishes/Dishes";
+import {
+  OfferSkeleton,
+  SearchDetailsSkeleton
+} from "../../components/Shimmer/Shimmer/Shimmer";
 
 const popularCuisines = [
   {
@@ -31,7 +35,7 @@ const SearchPage = () => {
   const [activeTab, setActiveTab] = useState("dishes");
   const [showData, setShowData] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [dishes, setDishes] = useState([]);
   const [restaurantData, setRestaurantData] = useState([]);
 
@@ -39,7 +43,7 @@ const SearchPage = () => {
     if (searchVal === "") return;
 
     try {
-      // setLoading(true);
+      setLoading(true);
       const [restaurantResult, dishesResult] = await Promise.all([
         getSearchRestaurant(searchVal),
         getDishesData(searchVal)
@@ -58,12 +62,12 @@ const SearchPage = () => {
       console.log("DISH DATA ", newDishesData);
 
       setRestaurantData(newRestaurantData || []);
-      // setLoading(false);
+      setLoading(false);
       setShowData(true);
       setDishes(newDishesData || []);
     } catch (error) {
-      // console.log(error);
-      // setLoading(false);
+      console.log(error);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -75,6 +79,7 @@ const SearchPage = () => {
     setRestaurantData([]);
     setDishes([]);
     setShowData(false);
+    setLoading(false);
   };
 
   const handleFormSubmit = (e) => {
@@ -131,9 +136,14 @@ const SearchPage = () => {
               </div>
             </div>
           )}
+          {loading && (
+            <div className="flex flex-wrap items-center">
+              <OfferSkeleton />
+            </div>
+          )}
           {!showData ? (
             <div className="w-full">
-              <div>
+              <div className="flex flex-wrap justify-center gap-7">
                 {searchVal.length === 0 && (
                   <h1 className="text-center text-2xl">
                     Search for Restaurants and Food

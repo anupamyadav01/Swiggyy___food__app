@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { setToggleSignIn } from "../../utils/slices/toggleSignInSlice";
-import AddToCartBtn from "../../components/AddToCartBtn/AddToCartBtn";
+// import AddToCartBtn from "../../components/AddToCartBtn/AddToCartBtn";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -149,7 +149,7 @@ const Cart = () => {
                   ))}
                 </div>
                 <div className="flex justify-center p-5">
-                  <button
+                  <buttonn
                     onClick={() => {
                       toast.success("Your cart is Empty", {
                         position: "top-right"
@@ -163,7 +163,7 @@ const Cart = () => {
                     ) : (
                       "Clear Cart"
                     )}
-                  </button>
+                  </buttonn>
                 </div>
               </div>
             </div>
