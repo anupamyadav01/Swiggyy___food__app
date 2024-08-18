@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef, useEffect } from "react";
 import NoImage from "../../../assets/no-image.png";
+import { Link } from "react-router-dom";
 
 const RestaurantCard = ({ data }) => {
   const imgURL = `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/`;
@@ -41,7 +42,12 @@ const RestaurantCard = ({ data }) => {
       <div className="w-full">
         <div className="flex items-start justify-between pb-4">
           <div>
-            <h2 className="text-2xl font-semibold">{name}</h2>
+            <Link
+              to={`/restaurant/${resData?.info?.id}`}
+              className="text-2xl font-semibold"
+            >
+              {name}
+            </Link>
             <div className="flex items-center text-[19px] font-medium text-gray-700">
               <span className="mr-2 flex items-center">
                 <span className="mr-1 mt-0.5">

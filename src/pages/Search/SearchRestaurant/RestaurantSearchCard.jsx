@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const SearchRestaurantCard = ({ restaurant }) => {
   // console.log(restaurant);
@@ -19,7 +20,10 @@ const SearchRestaurantCard = ({ restaurant }) => {
   const flatDeal = aggregatedDiscountInfoV3?.discountTag;
 
   return (
-    <div className="flex w-full max-w-lg rounded-lg border bg-white p-4">
+    <Link
+      to={`/restaurant/${restaurant?.card?.card?.info?.id}`}
+      className="flex w-full max-w-lg rounded-lg border border-gray-300 bg-white p-4"
+    >
       {/* Left Side Image with Offer */}
       <div className="relative h-28 w-[28%] flex-shrink-0">
         <img
@@ -70,7 +74,7 @@ const SearchRestaurantCard = ({ restaurant }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
