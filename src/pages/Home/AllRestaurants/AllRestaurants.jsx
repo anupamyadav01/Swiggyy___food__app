@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setFilterData } from "../../../utils/slices/filterSlice";
 
 const AllRestaurants = ({ restaurantData, title }) => {
-  // console.log(restaurantData);
+  //   console.log(restaurantData);
   const dispatch = useDispatch();
 
   const [activeBtn, setActiveBtn] = useState(null);
@@ -28,7 +28,7 @@ const AllRestaurants = ({ restaurantData, title }) => {
   dispatch(setFilterData(activeBtn));
 
   return (
-    <div>
+    <div className="px-5 sm:p-0">
       <div>
         <p className="text-2xl font-bold">{title}</p>
         <div className="mb-10 mt-5 flex flex-wrap gap-3">
@@ -51,7 +51,7 @@ const AllRestaurants = ({ restaurantData, title }) => {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 sm:p-0 md:grid-cols-3 lg:grid-cols-4">
         {restaurantData &&
           restaurantData.map((item) => {
             return <RestaurentCard key={item.info.id} item={item} />;

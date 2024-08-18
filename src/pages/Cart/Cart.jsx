@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { setToggleSignIn } from "../../utils/slices/toggleSignInSlice";
+import AddToCartBtn from "../../components/AddToCartBtn/AddToCartBtn";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -80,11 +81,17 @@ const Cart = () => {
                       className="flex w-full items-center border-b-[1px] border-b-gray-300 sm:gap-6 sm:p-4"
                     >
                       <div className="grid w-full grid-cols-5 sm:gap-8">
-                        <div className="col-span-2">
+                        {/* <div className="col-span-2 h-40 w-40">
                           <img
-                            className="h-44 w-full object-contain"
-                            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${item.imageId}`}
+                            className="object-contain"
+                            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_500,h_500,c_fit/${item.imageId}`}
                             alt={item.name}
+                          />
+                        </div> */}
+                        <div className="h-[162px] w-[170px]">
+                          <img
+                            className="h-full rounded-xl"
+                            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_400,c_fit/${item.imageId}`}
                           />
                         </div>
                         <div className="col-span-2 ml-10 mt-3 flex w-3/5 flex-col">

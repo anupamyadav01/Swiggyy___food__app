@@ -10,7 +10,7 @@ const RestaurantCard = ({ item }) => {
       key={item.info.id}
       className="cursor-pointer duration-100 hover:scale-95"
     >
-      <div className="relative h-40 overflow-hidden rounded-2xl border border-black">
+      <div className="relative h-40 overflow-hidden rounded-2xl border border-gray-300">
         <img
           className="h-full w-full object-cover"
           src={IMG_BASE_URL + item.info.cloudinaryImageId}

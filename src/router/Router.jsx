@@ -10,6 +10,7 @@ import { changeAddress } from "../utils/slices/addressSlice";
 import Navbar from "../components/Navbar/Navbar";
 import MainPage from "../pages";
 import Shimmer from "../components/Shimmer/Shimmer";
+import Footer from "../components/Footer/Footer.jsx";
 
 // Lazy loading components for code-splitting
 const Home = React.lazy(() => import("../pages/Home/index.jsx"));
@@ -71,11 +72,15 @@ const Router = () => {
     },
     [dispatch]
   );
-
   const searchResults = useMemo(() => {
     return searchData.map((item) => (
       <div
-        onClick={() => getLatitudeAndLongitude(item.place_id)}
+        onClick={() => {
+          getLatitudeAndLongitude(item.place_id);
+          setTimeout(() => {
+            setSearchData([]);
+          }, 1000);
+        }}
         className="cursor-pointer border-b border-gray-200 p-2"
         key={item.place_id}
       >
@@ -107,14 +112,17 @@ const Router = () => {
 
               <div
                 style={{ transform: showLocation && "translateX(0)" }}
-                className="absolute left-0 z-[60] h-screen w-[300px] -translate-x-[500px] border border-red-500 bg-white duration-500 sm:w-[500px]"
+                className="absolute left-0 z-[60] h-screen w-[300px] -translate-x-[500px] bg-white duration-500 sm:w-[500px]"
               >
                 <div className="h-full w-full px-3 py-6">
-                  <div className="flex flex-col gap-5">
+                  <div className="flex flex-col gap-5 sm:mx-8">
                     <div>
                       <RxCross2
                         className="cursor-pointer text-2xl"
-                        onClick={() => dispatch(toggleSearchLocation())}
+                        onClick={() => {
+                          dispatch(toggleSearchLocation());
+                          setSearchData([]);
+                        }}
                       />
                     </div>
                     <div>
@@ -126,17 +134,7 @@ const Router = () => {
                         value={query}
                       />
                     </div>
-                    <div className="px-2">
-                      {searchData.length > 0 ? (
-                        searchResults
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center">
-                          <p className="text-2xl font-semibold">
-                            No result found
-                          </p>
-                        </div>
-                      )}
-                    </div>
+                    <div className="px-2">{searchResults}</div>
                   </div>
                 </div>
               </div>
@@ -157,7 +155,7 @@ const Router = () => {
                 </Route>
               </Routes>
             </React.Suspense>
-            {/* <Footer /> */}
+            <Footer />
           </div>
         </LatitudeAndLogitudeContext.Provider>
       </BrowserRouter>

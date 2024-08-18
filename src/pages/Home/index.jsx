@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import FoodTypes from "./FoodTypes/FoodTypes";
-import Restaurents from "./AllRestaurants/AllRestaurants";
+import AllRestaurants from "./AllRestaurants/AllRestaurants";
 import TopRestaurent from "./TopRestaurants/TopRestaurants";
 import { getTopRestaurantsData } from "../../apis/index";
 import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
@@ -45,24 +45,39 @@ const Home = () => {
   const {
     cordinates: { lat, lng }
   } = useContext(LatitudeAndLogitudeContext);
-  const fetchData = async () => {
-    try {
-      const data = await getTopRestaurantsData(lat, lng);
-      // console.log(
-      //   data?.data.cards[1].card?.card?.gridElements?.infoWithStyle?.restaurants
-      // );
-      setTitle(data?.data?.cards[1]?.card?.card?.header?.title);
-      setRestaurantData(
-        data?.data.cards[1].card?.card.gridElements?.infoWithStyle?.restaurants
-      );
-    } catch (error) {
-      console.log("fetching Error from home page", error);
-    }
-  };
+  // *****************************************
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    getTopRestaurantsData(lat, lng)
+      .then((data) => {
+        setTitle(data?.data?.cards[1]?.card?.card?.header?.title);
+        setRestaurantData(
+          data?.data.cards[1].card?.card.gridElements?.infoWithStyle
+            ?.restaurants
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [lat, lng]);
+
+  // *****************************************
+  // const fetchData = async () => {
+  //   try {
+  //     const data = await getTopRestaurantsData(lat, lng);
+
+  //     setTitle(data?.data?.cards[1]?.card?.card?.header?.title);
+  //     setRestaurantData(
+  //       data?.data.cards[1].card?.card.gridElements?.infoWithStyle?.restaurants
+  //     );
+  //   } catch (error) {
+  //     console.log("fetching Error from home page", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="w-full">
@@ -81,7 +96,7 @@ const Home = () => {
         <hr className="mb-9 mt-10" />
       </div>
       <div className="w-full">
-        <Restaurents
+        <AllRestaurants
           restaurantData={filterBtnName ? filteredData : restaurantData}
           title={title}
         />

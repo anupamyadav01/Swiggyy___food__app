@@ -1,16 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-// import SwiggyData from "../../constants/SwiggyData.json";
 import { Link } from "react-router-dom";
 import { getTopRestaurantsData } from "../../../apis/index";
 import { LatitudeAndLogitudeContext } from "../../../context/SwiggyContext";
 const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 const TopRestaurent = () => {
   const [value, setValue] = useState(0);
-  // const [food] = useState(
-  //   SwiggyData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-  //     ?.restaurants
-  // );
-  // console.log(food);
   const [title, setTitle] = useState("");
   const {
     cordinates: { lat, lng }
@@ -79,7 +73,7 @@ const TopRestaurent = () => {
                   to={`/restaurant/${item?.cta?.link.split("/").at(-1)}`}
                   className="cursor-pointer duration-100 hover:scale-95"
                 >
-                  {console.log(item)}
+                  {/* {console.log(item)} */}
                   <div className="relative h-44 overflow-hidden rounded-2xl">
                     <img
                       className="min-w-[270px]"
