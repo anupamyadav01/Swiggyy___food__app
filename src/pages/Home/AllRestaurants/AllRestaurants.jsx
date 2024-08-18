@@ -5,12 +5,16 @@ import { v4 as generateId } from "uuid";
 import { IoCloseOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { setFilterData } from "../../../utils/slices/filterSlice";
+import NoImgFound from "../../../assets/data.png";
 
 const AllRestaurants = ({ restaurantData, title }) => {
   //   console.log(restaurantData);
   const dispatch = useDispatch();
-
   const [activeBtn, setActiveBtn] = useState(null);
+
+  // if (restaurantData.length === 0) {
+  //   return <div>No Data</div>;
+  // }
 
   const filterButtons = [
     { id: generateId(), title: "Clear All Filters" },
@@ -51,12 +55,18 @@ const AllRestaurants = ({ restaurantData, title }) => {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 sm:p-0 md:grid-cols-3 lg:grid-cols-4">
-        {restaurantData &&
-          restaurantData.map((item) => {
-            return <RestaurentCard key={item.info.id} item={item} />;
-          })}
-      </div>
+      {restaurantData.length === 0 ? (
+        <div className="mx-auto flex w-[85%] items-center justify-center gap-2 py-6">
+          <img className="-mt-20 w-[50%]" src={NoImgFound} alt="" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 sm:p-0 md:grid-cols-3 lg:grid-cols-4">
+          {restaurantData &&
+            restaurantData.map((item) => {
+              return <RestaurentCard key={item.info.id} item={item} />;
+            })}
+        </div>
+      )}
     </div>
   );
 };

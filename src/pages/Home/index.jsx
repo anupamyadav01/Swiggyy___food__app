@@ -97,7 +97,17 @@ const Home = () => {
       </div>
       <div className="w-full">
         <AllRestaurants
-          restaurantData={filterBtnName ? filteredData : restaurantData}
+          restaurantData={
+            filterBtnName ? (
+              filteredData ? (
+                filteredData
+              ) : (
+                <div>No data found</div>
+              )
+            ) : (
+              restaurantData
+            )
+          }
           title={title}
         />
       </div>
