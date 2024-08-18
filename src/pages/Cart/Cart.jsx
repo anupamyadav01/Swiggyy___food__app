@@ -49,7 +49,7 @@ const Cart = () => {
         <>
           <Link
             to={`/restaurant/${resInfoLocalStorage?.id}`}
-            className="mt-4 flex w-full justify-center gap-7 bg-white"
+            className="mx-8 mt-4 flex w-full gap-1 bg-white sm:gap-7"
           >
             <div className="w-28">
               <img
@@ -68,68 +68,74 @@ const Cart = () => {
             </span>
           </Link>
           <div className="relative flex w-full">
-            <div className="grid w-4/5 grid-cols-4 gap-4">
-              <div className="col-span-4 h-full w-full bg-white px-4">
-                <div className="sticky top-[80px] z-10 flex items-center justify-between border-b-[2px] border-b-gray-300 bg-white py-3">
-                  <h2 className="text-3xl font-medium">Shopping Cart</h2>
+            <div className="grid w-full grid-cols-4 gap-4 sm:w-4/5">
+              <div className="col-span-4 h-full w-full bg-white px-1 sm:px-4">
+                <div className="sticky top-[80px] z-10 flex w-full items-center justify-between border-b-[2px] border-b-gray-300 bg-white py-3">
+                  <h2 className="ml-4 text-3xl font-medium">Shopping Cart</h2>
                 </div>
                 <div>
                   {cartData.map((item) => (
                     <div
                       key={item.id}
-                      className="flex w-full items-center gap-6 border-b-[1px] border-b-gray-300 p-4"
+                      className="flex w-full items-center border-b-[1px] border-b-gray-300 sm:gap-6 sm:p-4"
                     >
-                      <div className="flex w-full items-center gap-6">
-                        <div className="w-1/6">
+                      <div className="grid w-full grid-cols-5 sm:gap-8">
+                        <div className="col-span-2">
                           <img
                             className="h-44 w-full object-contain"
                             src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${item.imageId}`}
                             alt={item.name}
                           />
                         </div>
-                        <div className="flex w-3/5 flex-col gap-2">
-                          <h2 className="text-lg font-semibold">{item.name}</h2>
-                          <p className="text-base">
-                            Unit Price:{" "}
+                        <div className="col-span-2 ml-10 mt-3 flex w-3/5 flex-col">
+                          <h2 className="whitespace-nowrap text-justify text-base font-semibold">
+                            {item.name}
+                          </h2>
+                          <div className="flex text-base">
+                            <span className="whitespace-nowrap">
+                              Unit Price:{" "}
+                            </span>
                             <span className="font-semibold">
                               ₹{item.price / 100 || item.defaultPrice / 100}
                             </span>
-                          </p>
-                          <div className="flex w-24 items-center justify-center gap-1 rounded-md bg-[#f0f2f2] py-1 text-center drop-shadow-lg">
-                            <p>Qty:</p>
-                            <p
-                              onClick={() => dispatch(decreaseItem(item.id))}
-                              className="cursor-pointer rounded-md bg-gray-200 px-1 duration-300 hover:bg-gray-400"
+                          </div>
+                          <div className="flex items-center gap-4 py-3 sm:block">
+                            <div className="flex w-24 items-center justify-center gap-1 rounded-md bg-[#f0f2f2] px-2 py-1 drop-shadow-lg">
+                              <p>Qty:</p>
+                              <p
+                                onClick={() => dispatch(decreaseItem(item.id))}
+                                className="cursor-pointer rounded-md bg-gray-200 px-1 duration-300 hover:bg-gray-400"
+                              >
+                                -
+                              </p>
+                              <p>{item.quantity || 1}</p>
+                              <p
+                                onClick={() => dispatch(increaseItem(item.id))}
+                                className="cursor-pointer rounded-md bg-gray-200 px-1 duration-300 hover:bg-gray-400"
+                              >
+                                +
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => {
+                                toast.success("Item Deleted", {
+                                  position: "top-right"
+                                });
+                                dispatch(deleteItem(item.id));
+                              }}
+                              className="w-24 whitespace-nowrap rounded-lg bg-red-600 px-2 py-1.5 text-sm text-white duration-300 hover:bg-red-700 active:bg-red-900 sm:text-base"
                             >
-                              -
-                            </p>
-                            <p>{item.quantity || 1}</p>
-                            <p
-                              onClick={() => dispatch(increaseItem(item.id))}
-                              className="cursor-pointer rounded-md bg-gray-200 px-1 duration-300 hover:bg-gray-400"
-                            >
-                              +
+                              Delete Item
+                            </button>
+                          </div>
+                          <div>
+                            <p className="font-titleFont whitespace-nowrap text-lg font-semibold">
+                              Total Price :₹
+                              {((item.price || item.defaultPrice) *
+                                (item.quantity || 1)) /
+                                100}
                             </p>
                           </div>
-                          <button
-                            onClick={() => {
-                              toast.success("Item Deleted", {
-                                position: "top-right"
-                              });
-                              dispatch(deleteItem(item.id));
-                            }}
-                            className="mt-2 w-24 rounded-lg bg-red-600 py-1 text-white duration-300 hover:bg-red-700 active:bg-red-900"
-                          >
-                            Delete Item
-                          </button>
-                        </div>
-                        <div>
-                          <p className="font-titleFont text-lg font-semibold">
-                            ₹
-                            {((item.price || item.defaultPrice) *
-                              (item.quantity || 1)) /
-                              100}
-                          </p>
                         </div>
                       </div>
                     </div>
@@ -154,7 +160,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <div className="fixed right-10 top-36 w-[24%] border bg-white px-4 py-5 shadow-md">
+            <div className="right-10 top-36 hidden w-[24%] border bg-white px-4 py-5 shadow-md sm:fixed">
               <div className="flex gap-8">
                 <div className="flex items-center justify-center gap-3 bg-white">
                   <span>

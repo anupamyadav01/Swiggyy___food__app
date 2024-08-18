@@ -12,16 +12,16 @@ const SmallScreen = ({ handleLocationFunc, isActive, setIsActive }) => {
   const address = useSelector((state) => state.addressSlice.address);
 
   return (
-    <div>
+    <div className="w-full">
       {/* for small screen  */}
       <div
         className={`absolute left-0 z-50 flex w-full flex-col bg-white transition-all duration-500 lg:hidden ${isActive ? "translate-y-0" : "-translate-y-[100%]"}`}
       >
         {/* navbar */}
-        <div className="z-50 w-full px-16 shadow-lg">
+        <div className="z-50 w-full px-4 shadow-lg sm:px-16">
           <div className="flex w-full items-center justify-between pb-4">
-            <div className="flex items-center">
-              <Link to={"/"} className="cursor-pointer pr-10">
+            <div className="flex w-full items-center">
+              <Link to={"/"} className="cursor-pointer pr-3">
                 <svg
                   className="_8pSp-"
                   viewBox="0 0 559 825"
@@ -51,7 +51,7 @@ const SmallScreen = ({ handleLocationFunc, isActive, setIsActive }) => {
                 </svg>
               </Link>
               <div
-                className="flex items-center gap-3"
+                className="flex items-center gap-1"
                 onClick={handleLocationFunc}
               >
                 <p className="cursor-pointer border-b-2 border-b-black font-bold hover:border-b-2 hover:border-b-orange-500 hover:text-orange-500">

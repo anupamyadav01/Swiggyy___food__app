@@ -43,7 +43,7 @@ const Navbar = () => {
       });
   };
   return (
-    <div className="sticky top-0 z-50 h-20 w-full bg-white px-16 py-4 shadow-md">
+    <div className="sticky top-0 z-50 h-20 w-full bg-white px-4 py-4 shadow-md sm:px-16">
       {/* small screen  */}
 
       <SmallScreen
@@ -54,7 +54,7 @@ const Navbar = () => {
 
       <div className="mx-auto flex max-w-[1280px] items-center justify-between">
         <div className="flex items-center">
-          <Link to={"/"} className="cursor-pointer pr-10">
+          <Link to={"/"} className="cursor-pointer pr-3 sm:pr-10">
             <img src={SwiggyLogo} alt="swiggy-logo" className="h-12" />
           </Link>
           <div className="flex items-center gap-3" onClick={handleLocationFunc}>

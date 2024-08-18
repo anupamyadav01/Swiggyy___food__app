@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import FoodTypes from "../../components/FoodTypes/FoodTypes";
-import Restaurents from "../../components/Restaurents/Restaurents";
-import TopRestaurent from "../../components/TopRestaurent/TopRestaurent";
-import { getTopRestaurantsData } from "../../apis";
+import FoodTypes from "./FoodTypes/FoodTypes";
+import Restaurents from "./AllRestaurants/AllRestaurants";
+import TopRestaurent from "./TopRestaurants/TopRestaurants";
+import { getTopRestaurantsData } from "../../apis/index";
 import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
 import { useSelector } from "react-redux";
 

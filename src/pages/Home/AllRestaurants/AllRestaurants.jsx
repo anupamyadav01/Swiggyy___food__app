@@ -1,12 +1,12 @@
 import { useState } from "react";
-import RestaurentCard from "../RestaurentCard/RestaurentCard";
+import RestaurentCard from "../AllRestaurants/RestaurentCard";
 import PropTypes from "prop-types";
 import { v4 as generateId } from "uuid";
 import { IoCloseOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { setFilterData } from "../../utils/slices/filterSlice";
+import { setFilterData } from "../../../utils/slices/filterSlice";
 
-const Restaurents = ({ restaurantData, title }) => {
+const AllRestaurants = ({ restaurantData, title }) => {
   // console.log(restaurantData);
   const dispatch = useDispatch();
 
@@ -61,9 +61,9 @@ const Restaurents = ({ restaurantData, title }) => {
   );
 };
 
-Restaurents.propTypes = {
+AllRestaurants.propTypes = {
   restaurantData: PropTypes.array,
   title: PropTypes.string
 };
 
-export default Restaurents;
+export default AllRestaurants;

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { getFoodTypesData } from "../../apis";
-import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
+import { getFoodTypesData } from "../../../apis/index";
+import { LatitudeAndLogitudeContext } from "../../../context/SwiggyContext";
 const FoodTypes = () => {
   const {
     cordinates: { lat, lng }

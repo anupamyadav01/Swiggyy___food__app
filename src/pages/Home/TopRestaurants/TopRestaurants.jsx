@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 // import SwiggyData from "../../constants/SwiggyData.json";
 import { Link } from "react-router-dom";
-import { getTopRestaurantsData } from "../../apis";
-import { LatitudeAndLogitudeContext } from "../../context/SwiggyContext";
+import { getTopRestaurantsData } from "../../../apis/index";
+import { LatitudeAndLogitudeContext } from "../../../context/SwiggyContext";
 const IMG_BASE_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 const TopRestaurent = () => {
   const [value, setValue] = useState(0);

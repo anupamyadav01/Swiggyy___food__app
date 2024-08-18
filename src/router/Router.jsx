@@ -12,7 +12,7 @@ import MainPage from "../pages";
 import Shimmer from "../components/Shimmer/Shimmer";
 
 // Lazy loading components for code-splitting
-const Home = React.lazy(() => import("../pages/Home/Home"));
+const Home = React.lazy(() => import("../pages/Home/index.jsx"));
 const SearchPage = React.lazy(() => import("../pages/Search/SearchPage"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart"));
 const Support = React.lazy(() => import("../pages/Support/Support"));
@@ -79,10 +79,10 @@ const Router = () => {
         className="cursor-pointer border-b border-gray-200 p-2"
         key={item.place_id}
       >
-        <p className="text-base font-semibold text-gray-800 hover:text-orange-600">
+        <p className="text-sm font-semibold text-gray-800 hover:text-orange-600 sm:text-base">
           {item.structured_formatting.main_text}
         </p>
-        <p className="text-sm text-gray-400">
+        <p className="text-xs text-gray-400 sm:text-sm">
           {item.structured_formatting.secondary_text}
         </p>
       </div>
@@ -107,9 +107,9 @@ const Router = () => {
 
               <div
                 style={{ transform: showLocation && "translateX(0)" }}
-                className="absolute left-0 z-[60] h-screen w-[500px] -translate-x-[500px] border border-black bg-white duration-500"
+                className="absolute left-0 z-[60] h-screen w-[300px] -translate-x-[500px] border border-red-500 bg-white duration-500 sm:w-[500px]"
               >
-                <div className="h-full w-full px-14 py-6">
+                <div className="h-full w-full px-3 py-6">
                   <div className="flex flex-col gap-5">
                     <div>
                       <RxCross2
@@ -121,12 +121,12 @@ const Router = () => {
                       <input
                         type="text"
                         placeholder="Search for area, street name.."
-                        className="w-full border-2 border-gray-200 p-3 font-semibold outline-none focus:shadow-lg"
+                        className="w-[90%] border-2 border-gray-200 p-3 font-semibold outline-none focus:shadow-lg sm:w-full"
                         onChange={(e) => setQuery(e.target.value)}
                         value={query}
                       />
                     </div>
-                    <div className="px-7">
+                    <div className="px-2">
                       {searchData.length > 0 ? (
                         searchResults
                       ) : (
