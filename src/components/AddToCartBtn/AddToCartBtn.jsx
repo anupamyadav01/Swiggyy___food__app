@@ -28,21 +28,21 @@ function AddToCartBtn({ info, restaurantInfo }) {
         localStorage.setItem("restaurantInfo", JSON.stringify(restaurantInfo));
         toast.success("Item added to cart", {
           style: {
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" // Removes the shadow completely
+            boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1) !important" // Removes the shadow completely
           }
         });
       } else {
         dispatch(toggleDifferentRestaurant());
         toast.error("Different Restaurant Item", {
           style: {
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" // Removes the shadow completely
+            boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1) !important" // Removes the shadow completely
           }
         });
       }
     } else {
       toast.error("Item already added to cart", {
         style: {
-          boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)" // Removes the shadow completely
+          boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1) !important" // Removes the shadow completely
         }
       });
     }

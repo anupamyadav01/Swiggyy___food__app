@@ -4,8 +4,8 @@ import { getDishesData, getSearchRestaurant } from "../../apis";
 import SearchRestaurant from "./SearchRestaurant/SearchRestaurant";
 import Dishes from "./Dishes/Dishes";
 import {
-  OfferSkeleton,
-  SearchDetailsSkeleton
+  OfferSkeleton
+  // SearchDetailsSkeleton
 } from "../../components/Shimmer/Shimmer/Shimmer";
 
 const popularCuisines = [
@@ -143,13 +143,13 @@ const SearchPage = () => {
           )}
           {!showData ? (
             <div className="w-full">
-              <div className="flex flex-wrap justify-center gap-7">
-                {searchVal.length === 0 && (
+              {searchVal.length === 0 && (
+                <div className="mx-auto flex max-w-[85%] flex-wrap justify-center gap-7 border border-gray-300 bg-gray-300 p-20 text-gray-600">
                   <h1 className="text-center text-2xl">
                     Search for Restaurants and Food
                   </h1>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           ) : (
             <div className="w-full">

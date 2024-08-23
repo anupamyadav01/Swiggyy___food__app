@@ -15,6 +15,7 @@ import {
   CircleSkeleton,
   RectangleSkeleton
 } from "../components/Shimmer/Shimmer/Shimmer.jsx";
+import ScrollToTop from "../components/ScrollToTop/ScrollToTop.jsx";
 
 // Lazy loading components for code-splitting
 const Home = React.lazy(() => import("../pages/Home/index.jsx"));
@@ -153,6 +154,7 @@ const Router = () => {
                 </div>
               }
             >
+              <ScrollToTop />
               <Routes>
                 <Route path="/" element={<MainPage />}>
                   <Route path="/" element={<Home />} />

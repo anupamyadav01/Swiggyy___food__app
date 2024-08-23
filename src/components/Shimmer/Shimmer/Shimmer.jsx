@@ -68,12 +68,12 @@ export const SearchDetailsSkeleton = () => {
 export const HelpAndSupportSkeleton = () => {
   return (
     <>
-      {Array(6)
+      {Array(1)
         .fill("")
         .map((e, index) => (
           <Skeleton
             width="100%"
-            height="5rem"
+            height="10rem"
             borderRadius="8px"
             key={index}
             className="flex-shrink-0"

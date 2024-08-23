@@ -8,6 +8,8 @@ import { setFilterData } from "../../../utils/slices/filterSlice";
 import NoImgFound from "../../../assets/data.png";
 
 const AllRestaurants = ({ restaurantData, title }) => {
+  console.log(title);
+
   //   console.log(restaurantData);
   const dispatch = useDispatch();
   const [activeBtn, setActiveBtn] = useState(null);
@@ -34,7 +36,9 @@ const AllRestaurants = ({ restaurantData, title }) => {
   return (
     <div className="px-5 sm:p-0">
       <div>
-        <p className="text-2xl font-bold">{title}</p>
+        <p className="text-2xl font-bold">
+          All restaurants in {title?.split(" ").at(-1)}
+        </p>
         <div className="mb-10 mt-5 flex flex-wrap gap-3">
           {filterButtons.map((item) => (
             <div

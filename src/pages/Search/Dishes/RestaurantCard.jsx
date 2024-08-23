@@ -115,12 +115,15 @@ const RestaurantCard = ({ data }) => {
                   ₹{dish?.info?.price / 100}
                 </p>
               </div>
-              <div className="col-span-2 h-36">
+              <div className="relative col-span-2 h-36">
                 <img
                   src={`${imgURL}${dish?.info?.imageId}` || NoImage}
                   alt={name}
                   className="h-full w-full rounded-xl object-cover"
                 />
+                <button className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-md border bg-white px-6 py-1 text-lg font-bold text-green-700">
+                  Add
+                </button>
               </div>
             </div>
           ))}

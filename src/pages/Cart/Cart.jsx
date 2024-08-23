@@ -81,13 +81,6 @@ const Cart = () => {
                       className="flex w-full items-center border-b-[1px] border-b-gray-300 sm:gap-6 sm:p-4"
                     >
                       <div className="grid w-full grid-cols-5 sm:gap-8">
-                        {/* <div className="col-span-2 h-40 w-40">
-                          <img
-                            className="object-contain"
-                            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_500,h_500,c_fit/${item.imageId}`}
-                            alt={item.name}
-                          />
-                        </div> */}
                         <div className="h-[162px] w-[170px]">
                           <img
                             className="h-full rounded-xl"
@@ -156,7 +149,7 @@ const Cart = () => {
                       });
                       dispatch(clearCart());
                     }}
-                    className="mt-2 w-36 rounded-md border border-[#F15700] py-2 text-lg font-medium text-[#F15700] duration-300 hover:bg-[#F15700] hover:text-white"
+                    className="mt-2 w-36 rounded-md border border-[#F15700] py-2 text-center text-lg font-medium text-[#F15700] duration-300 hover:bg-[#F15700] hover:text-white"
                   >
                     {cartData.length === 0 ? (
                       <p>Cart is Empty</p>
@@ -167,7 +160,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <div className="right-10 top-36 hidden w-[24%] border bg-white px-4 py-5 shadow-md sm:fixed">
+            <div className="right-10 top-36 w-[24%] border bg-white px-4 py-5 shadow-md sm:fixed">
               <div className="flex gap-8">
                 <div className="flex items-center justify-center gap-3 bg-white">
                   <span>
@@ -197,7 +190,7 @@ const Cart = () => {
           </div>
         </>
       ) : (
-        <div className="relative top-[100px] flex w-full flex-col items-center justify-center">
+        <div className="relative top-[100px] flex w-full flex-col items-center justify-center pb-10">
           <div className="w-60">
             <img
               className="w-full rounded-xl"
