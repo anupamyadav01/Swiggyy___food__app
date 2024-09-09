@@ -7,6 +7,7 @@ const App = () => {
       <Provider store={store}>
         <Router />
       </Provider>
+      {/* checking  */}
     </>
   );
 };
