@@ -9,9 +9,12 @@ import {
   HelpAndSupportSkeleton,
   OfferSkeleton
 } from "../../components/Shimmer/Shimmer/Shimmer";
+
 const RestaurantDetail = () => {
   const { id } = useParams();
-  const mainID = id.split("-").at(-1);
+  const match = id.match(/(\d+)$/);
+  const mainID = match ? match[1] : null;
+
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState([]);
   const [offersData, setOffersData] = useState([]);
@@ -24,13 +27,17 @@ const RestaurantDetail = () => {
   const [value, setValue] = useState(0);
 
   const fetchRestaurantDetails = useCallback(async () => {
+    if (!mainID) {
+      console.error("No valid restaurant ID found");
+      return;
+    }
+
     try {
       setLoading(true);
       const response = await fetch(
-        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.9124336&lng=75.7872709&restaurantId=${mainID}&catalog_qa=undefined&submitAction=ENTER`
+        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.95250&lng=75.71050&restaurantId=${mainID}&catalog_qa=undefined&submitAction=ENTER`
       );
       const results = await response.json();
-      // console.log(results?.data?.cards[2]?.card?.card?.info);
       setRestaurantInfo(results?.data?.cards[2]?.card?.card?.info);
       setOffersData(
         results?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers
@@ -43,7 +50,7 @@ const RestaurantDetail = () => {
       setMenuData(filteredData);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setLoading(false);
     }
   }, [mainID]);
@@ -62,6 +69,7 @@ const RestaurantDetail = () => {
       setValue((prev) => prev - 1);
     }
   };
+
   return (
     <div className="relative w-full">
       {loading ? (
@@ -97,9 +105,9 @@ const RestaurantDetail = () => {
                 <div className="w-full p-4">
                   <div className="flex items-center gap-2 font-bold">
                     <i className="fi fi-ss-circle-star mt-1 text-lg text-green-600"></i>
-                    <span>{restaurantInfo.avgRating}</span>
-                    <span>({restaurantInfo.totalRatingsString})</span>•
-                    <span>{restaurantInfo.costForTwoMessage}</span>
+                    <span>{restaurantInfo?.avgRating}</span>
+                    <span>({restaurantInfo?.totalRatingsString})</span>•
+                    <span>{restaurantInfo?.costForTwoMessage}</span>
                   </div>
 
                   <p className="font-semibold text-orange-600 underline">
@@ -116,10 +124,10 @@ const RestaurantDetail = () => {
                       <p>
                         Outlet{" "}
                         <span className="font-normal text-gray-500">
-                          {restaurantInfo.locality}
+                          {restaurantInfo?.locality}
                         </span>
                       </p>
-                      <p>{restaurantInfo.sla?.slaString}</p>
+                      <p>{restaurantInfo?.sla?.slaString}</p>
                     </div>
                   </div>
                 </div>
@@ -127,7 +135,7 @@ const RestaurantDetail = () => {
 
                 <div className="w-full">
                   <div className="flex items-center p-3">
-                    {restaurantInfo.length !== 0 &&
+                    {restaurantInfo?.length !== 0 &&
                     restaurantInfo?.expectationNotifiers ? (
                       <>
                         <img
@@ -179,20 +187,20 @@ const RestaurantDetail = () => {
                     onClick={handleNext}
                     className={
                       `flex h-9 w-9 cursor-pointer items-center justify-center rounded-full ` +
-                      (value >= 124 ? "bg-gray-100" : "bg-gray-200")
+                      (value >= menuData.length - 1 ? "bg-gray-100" : "bg-gray-200")
                     }
                   >
                     <i
                       className={
                         `fi fi-rr-arrow-small-right mt-1 text-2xl ` +
-                        (value >= 124 ? "text-gray-300" : "text-gray-800")
+                        (value >= menuData.length - 1 ? "text-gray-300" : "text-gray-800")
                       }
                     ></i>
                   </div>
                 </div>
               </div>
               <div className="mx-4 mt-5 flex gap-4 hover:cursor-pointer">
-                {offersData.map((data, i) => (
+                {offersData?.map((data, i) => (
                   <OffersCard data={data} key={i} />
                 ))}
               </div>
@@ -217,7 +225,7 @@ const RestaurantDetail = () => {
             </div>
 
             <div className="mt-10">
-              {menuData.map(({ card: { card } }) => {
+              {menuData?.map(({ card: { card } }) => {
                 return (
                   <MenuItems
                     key={card.title}
@@ -261,4 +269,5 @@ const RestaurantDetail = () => {
     </div>
   );
 };
+
 export default RestaurantDetail;
